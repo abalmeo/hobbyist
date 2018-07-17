@@ -36,4 +36,31 @@ router.get(
     }
   );
 
+  //POST api/profile
+//Create user profile
+//Private route
+router.get(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+     // Get inpuits
+     const profileInputs = {} ;
+     profileFields.user = req.user.id; 
+     if(req.body.handle) profileInputs.handle = req.body.handle;
+     if(req.body.location) profileInputs.location = req.body.location;
+     if(req.body.bio) profileInputs.bio = req.body.bio;
+
+     //The next tnree inputs need to separated to be put into an array.
+     if(typeof req.body.skills !== 'undefined') {
+         profileInputs.skills = req.body.skills.split(',');
+        }
+     if(typeof req.body.equipment !== 'undefined') {
+         profileInputs.equipment = req.body.equipment.split(',');
+        }
+     if(typeof req.body.interests !== 'undefined') {
+         profileInputs.interests = req.body.interests.split(','); 
+        }
+    }
+  );
+
 module.exports = router; 
