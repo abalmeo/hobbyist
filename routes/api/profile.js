@@ -21,7 +21,8 @@ router.get(
     '/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-      const errors = {};
+        //Get fields 
+      const errors = {}; 
   
       Profile.findOne({ user: req.user.id })
         .populate('user', ['name', 'avatar'])
@@ -39,18 +40,19 @@ router.get(
   //POST api/profile
 //Create user profile
 //Private route
-router.get(
+router.post(
     '/',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
-     // Get inpuits
+     // Get fields
      const profileInputs = {} ;
      profileFields.user = req.user.id; 
+     // Checking to see if was sent in from handle for all fields (handle, location, bio)
      if(req.body.handle) profileInputs.handle = req.body.handle;
      if(req.body.location) profileInputs.location = req.body.location;
      if(req.body.bio) profileInputs.bio = req.body.bio;
 
-     //The next tnree inputs need to separated to be put into an array.
+     //The next three inputs need to separated to be put into an array.
      if(typeof req.body.skills !== 'undefined') {
          profileInputs.skills = req.body.skills.split(',');
         }
