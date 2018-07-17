@@ -27,11 +27,10 @@ const ProfileSchema = new Schema({
     },
     equipment: {
         type: [String],
-        required: false
     },
-    interest: {
+    interests: {
         type: [String],
-        required: true,
+        required: true
     },
     date: {
         type: Date,
