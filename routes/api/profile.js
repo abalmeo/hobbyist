@@ -59,7 +59,7 @@ router.post('/',
      // Get inputs
      const profileInputs = {} ;
      profileInputs.user = req.user.id; 
-     if(req.body.handle) profileInputs.handle = req.body.handle;
+     if(req.body.userName) profileInputs.userName = req.body.userName;
      if(req.body.location) profileInputs.location = req.body.location;
      if(req.body.bio) profileInputs.bio = req.body.bio;
      //The next tnree inputs need to separated to be put into an array.
@@ -88,11 +88,11 @@ router.post('/',
             } else {
 
                 //Create
-                //Check if handle exists
-                Profile.findOne({ handle: profileInputs.handle })
+                //Check if username exists
+                Profile.findOne({ userName: profileInputs.userName })
                 .then(profile => {
                     if(profile) {
-                        errors.handle = 'Thant handle already exists';
+                        errors.userName = 'Thant username already exists';
                         res.status(400).json(errors); 
                     }
 
@@ -104,5 +104,42 @@ router.post('/',
         })
     }
   );
+
+//GET api/profile/username/:username
+//Get user profile by username
+//Public
+router.get('/username/:username', (req, res) => {
+    const errors = {}; 
+
+    Profile.findOne({userName: req.params.username})
+        .then(profile => {
+            if(!profile) {
+                errors.noprofile = 'There is no profile for this user';
+                res.status(404).json(errors); 
+            }
+
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err)); 
+}); 
+
+//GET api/profile/user/:id
+//Get user profile by id
+//Public
+router.get('/user/:id', (req, res) => {
+    const errors = {}; 
+    console.log('this is user id body: ' + req.params.id)
+
+    Profile.findOne({user: req.params.id})
+        .then(profile => {
+            if(!profile) {
+                errors.noprofile = 'There is no profile for this user';
+                res.status(404).json(errors); 
+            }
+
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err)); 
+}); 
 
 module.exports = router; 

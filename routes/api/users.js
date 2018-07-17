@@ -53,7 +53,7 @@ router.post('/register', (req, res) => {
         });
 });
 
-//Post api/posts/login
+//Post api/user/login
 //Login User & return JWT Token
 //Public
 router.post('/login', (req, res) => {
