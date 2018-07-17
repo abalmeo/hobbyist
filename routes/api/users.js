@@ -12,12 +12,12 @@ const validateLoginInput = require('../../validation/login')
 //Load User Model
 const User = require('../../models/User');
 
-//GET api/posts/test
+//GET api/users/test
 //Tests post route
 //Public
 router.get('/test', (req, res) => res.json({ msg: "Users Works" }));
 
-//GET api/posts/register
+//POST api/users/register
 //Register User
 //Public
 router.post('/register', (req, res) => {
@@ -44,7 +44,8 @@ router.post('/register', (req, res) => {
                     bcrypt.hash(newUser.password, salt, (err, hash) => {
                         if (err) throw err;
                         newUser.password = hash;
-                        newUser.save()
+                        newUser
+                            .save()
                             .then(user => res.json(user))
                             .catch(err => console.log(err));
                     })
@@ -53,7 +54,7 @@ router.post('/register', (req, res) => {
         });
 });
 
-//Post api/user/login
+//Post api/users/login
 //Login User & return JWT Token
 //Public
 router.post('/login', (req, res) => {
