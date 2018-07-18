@@ -7,6 +7,7 @@ class Login extends Component {
     constructor() {
         super();
         this.state = {
+            userid:"", 
             email: "",
             password: "",
             errors: {},
@@ -41,6 +42,7 @@ class Login extends Component {
             })
               .then(
                   res => {console.log(res.data);
+                    console.log(res.data.user._id);
                   this.setState({redirectTo: "/"})
                 
               }
