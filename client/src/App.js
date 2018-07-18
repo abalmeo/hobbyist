@@ -8,7 +8,15 @@ import Register from "./components/auth/Register";
 import UpdateProfile from "./components/UpdateProfile";
 import './App.css';
 
+
+
 class App extends Component {
+
+  constructor() {
+    super();
+      
+  }
+
   render() {
     return (
       <Router>

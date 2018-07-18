@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
+import axios from "axios";
+
 
 class Login extends Component {
     constructor() {
@@ -6,7 +9,8 @@ class Login extends Component {
         this.state = {
             email: "",
             password: "",
-            errors: {}
+            errors: {},
+            redirectTo: null
         }
 
         this.onChange = this.onChange.bind(this);
@@ -25,31 +29,42 @@ class Login extends Component {
             password: this.state.password,
         }
 
-        console.log(user);
+        axios.post('/api/users/login', user)
+        .then(
+          res => {
+            localStorage.setItem("token", res.data.token)
+            this.setState({redirectTo: "/register"})
+        })
+        .catch(err => console.log(err.response.data));
+    //     .catch(err => this.setState({errors: err.response.data}));
     }
 
   render() {
-    return (
-        <div className="login">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Log In</h1>
-              <p className="lead text-center">Sign in to your DevConnector account</p>
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                  <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="email" value={this.state.email} onChange={this.onChange}/>
-                </div>
-                <div className="form-group">
-                  <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" value={this.state.password} onChange={this.onChange}/>
-                </div>
-                <input type="submit" className="btn btn-info btn-block mt-4" />
-              </form>
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo}} />
+    } else {
+      return (
+          <div className="login">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 m-auto">
+                <h1 className="display-4 text-center">Log In</h1>
+                <p className="lead text-center">Sign in to your Hobbyist</p>
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                    <input type="email" className="form-control form-control-lg" placeholder="Email Address" name="email" value={this.state.email} onChange={this.onChange}/>
+                  </div>
+                  <div className="form-group">
+                    <input type="password" className="form-control form-control-lg" placeholder="Password" name="password" value={this.state.password} onChange={this.onChange}/>
+                  </div>
+                  <input type="submit" className="btn btn-info btn-block mt-4" />
+                </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
