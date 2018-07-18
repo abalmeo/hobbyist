@@ -33,7 +33,19 @@ class Login extends Component {
         .then(
           res => {
             localStorage.setItem("token", res.data.token)
-            this.setState({redirectTo: "/register"})
+            //another axios get request to see if profile exits
+            axios.get("/api/profile", {
+              headers: {
+                  "Authorization": localStorage.getItem("token")
+              }
+            })
+              .then(
+                  res => {console.log(res.data);
+                  this.setState({redirectTo: "/"})
+                
+              }
+            )
+            .catch(err => this.setState({redirectTo: "/profile"}))
         })
         .catch(err => console.log(err.response.data));
     //     .catch(err => this.setState({errors: err.response.data}));
