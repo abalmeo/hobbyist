@@ -1,3 +1,13 @@
+.nav-logo {
+  height: auto;
+  width: 40%;
+}
+
+.navbar-brand {
+  padding: 0; 
+  margin: 0; 
+}
+
 img {
   width: 100%;
 }
@@ -25,6 +35,11 @@ img {
   height: 100%;
 }
 
+#landing-logo {
+  height: auto;
+  width: 50%;
+}
+
 .card-form {
   opacity: 0.9;
 }
@@ -36,4 +51,15 @@ img {
 
 .form-control::placeholder {
   color: #bbb !important;
+}
+
+.register {
+  background: #ffbd4a; 
+  color: black;
+}
+
+.register:hover {
+  background: #ffbd4a; 
+  opacity: 0.9;
+  color: black;
 }
