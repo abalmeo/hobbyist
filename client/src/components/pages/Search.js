@@ -12,15 +12,19 @@ class Search extends Component {
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
-
+    
     componentDidMount() {
+        this.getProfile(); 
+    }
+
+    getProfile(){
+        console.log("testing"); 
         axios.get('api/profile/all')
         .then(res=>{
             console.log(res.data); 
             this.setState({profiles: res.data})
         })
-        .catch(err=>this.setState22)
-        
+        .catch(console.log("there is an error"))
     }
 
 onChange(e) {
@@ -36,7 +40,7 @@ onChange(e) {
 
  render() {
    return (
-     <form oValidate onSubmit={this.onSubmit}>
+     <form onSubmit={this.onSubmit}>
      <div className="form-group">
        <input
          type="text"

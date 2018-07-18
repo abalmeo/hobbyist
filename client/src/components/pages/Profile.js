@@ -9,8 +9,8 @@ class Profile extends Component {
         .then(res=>{
             console.log(res.data); 
         })
-        .catch(err=>this.setState22)
-        this.props.getProfiles();
+        .catch(err,console.log("there is an error"))
+        
     }
 
         render() {

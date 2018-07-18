@@ -19,6 +19,15 @@ class Register extends Component {
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+    componentDidMount() {
+        axios.get('api/profile/all')
+        .then(res=>{
+            console.log(res.data); 
+        })
+        .catch(console.log("there is an error"))
+        
+    }
+
     onChange(e) {
         this.setState({[e.target.name]: e.target.value});
     }
