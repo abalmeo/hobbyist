@@ -9,7 +9,7 @@ const validateProfileInput = require('../../validation/profile')
 //load profile model
 const Profile = require('../../models/Profile');
 //load  profile
-const User = require('. ./../models/User');
+const User = require('../../models/User');
 
 
 //GET api/posts/test
