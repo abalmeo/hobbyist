@@ -5,7 +5,7 @@ import Footer from "./components/layout/Footer";
 import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import UpdateProfile from "./components/UpdateProfile";
+import UpdateProfile from "./components/pages/UpdateProfile";
 import './App.css';
 
 

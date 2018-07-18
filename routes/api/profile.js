@@ -55,7 +55,7 @@ router.post('/',
 
             }
         
-            console.log(req.body); 
+
      // Get inputs
      const profileInputs = {} ;
      profileInputs.user = req.user.id; 
@@ -64,14 +64,20 @@ router.post('/',
      if(req.body.bio) profileInputs.bio = req.body.bio;
      //The next tnree inputs need to separated to be put into an array.
         if (typeof req.body.skills !== 'undefined') {
-            profileInputs.skills = req.body.skills.split(',');
+            profileInputs.skills = req.body.skills.split(',').map(function(item){
+                return item.trim();
+            });
         }
         if (typeof req.body.equipment !== 'undefined') {
-            profileInputs.equipment = req.body.equipment.split(',');
+            profileInputs.equipment = req.body.equipment.split(',').map(function(item){
+                return item.trim();
+            });
         }
 
         if (typeof req.body.interests !== 'undefined') {
-            profileInputs.interests = req.body.interests.split(',');
+            profileInputs.interests = req.body.interests.split(',').map(function(item){
+                return item.trim();
+            });
         }
 
         Profile.findOne({ user: req.user.id })
@@ -99,6 +105,8 @@ router.post('/',
                     //save profile
                     new Profile(profileInputs).save()
                     .then(profile => res.json(profile));
+
+                    //
                 })
             }
         })

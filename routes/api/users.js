@@ -29,6 +29,7 @@ router.post('/register', (req, res) => {
     }
 
     User.findOne({ email: req.body.email }) 
+        .populate("profile")
         .then(user => {
             if (user) {
                 errors.email = 'That email is taken';
@@ -70,6 +71,7 @@ router.post('/login', (req, res) => {
 
     //Find user by email 
     User.findOne({email})
+    .populate("profile")
         .then(user => {
             //check for user 
             if(!user) {
@@ -91,7 +93,9 @@ router.post('/login', (req, res) => {
                             (err, token) => {
                                 res.json({
                                     success: true,
-                                    token: 'Bearer ' + token
+                                    token: 'Bearer ' + token,
+                                    user: user
+                    
                                 })
                             });
                     } else {
