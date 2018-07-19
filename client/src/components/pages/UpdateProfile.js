@@ -54,7 +54,7 @@ class UpdateProfile extends Component {
                 this.setState({redirectTo: "/login"});
             }
             else {
-                this.setState({redirectTo: "/"});
+                this.setState({redirectTo: "/userpage"});
             }
         })
         .catch(err => this.setState({errors: err.response.data}));
