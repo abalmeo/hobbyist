@@ -11,13 +11,6 @@ import UserPage from "./components/pages/UserPage"
 
 import './App.css';
 
-{/* Redux store that holds complete state tree of app 
-  [] empty array as root reducer
-  {} initial state as empty object 
-*/}
-
-
-
 class App extends Component {
 
   constructor() {

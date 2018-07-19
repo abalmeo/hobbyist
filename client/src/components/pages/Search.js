@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { Card, CardItem } from "./profilecards";
-import { Col, Row, Container } from "./grid";
 import axios from "axios";
 import ListItem from '../layout/ListItem';
 import { runInThisContext } from 'vm';
@@ -71,7 +69,7 @@ class Search extends Component {
                                 <h3>{profile.userName}</h3>
                                 <p>{profile.occupation}</p>
                                 <p>{profile.location}</p>
-                                <a href="profile.html" className="btn btn-info">View Profile</a>
+                                <a href="profile.html" value={profile.user} className="btn btn-info">View Profile</a>
                             </div>
                             <div className="col-md-4 d-none d-lg-block">
                                 <h4>Skill Set</h4>
@@ -86,8 +84,6 @@ class Search extends Component {
                     </div>
 
                 ))}
-
-                <h3> No Results to Display</h3>
             </div>
 
 
