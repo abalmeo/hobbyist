@@ -70,7 +70,7 @@ class UserPage extends Component {
             <div className="col-md-12">
               <div className="row">
                 <div className="col-6">
-                  <a href="profiles.html" className="btn btn-light mb-3 float-left">Back To Profiles</a>
+                  <a href="/editprofile" className="btn btn-light mb-3 float-left">Edit Profile</a>
                 </div>
                 <div className="col-6">
 
