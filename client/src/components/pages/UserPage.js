@@ -14,8 +14,8 @@ class UserPage extends Component {
     this.state = {
       username: "",
       skills: [],
-      equipment: "",
-      interests: "",
+      equipment: [],
+      interests: [],
       location: "",
       bio: "",
       errors: {},
@@ -87,7 +87,11 @@ class UserPage extends Component {
                     <p className="lead">{this.state.profile.bio}
                 </p>
                     <hr />
+<<<<<<< HEAD
                     <h3 className="text-center">Skill Set</h3>
+=======
+                    <h3 className="text-center text-info">Skills</h3>
+>>>>>>> b37caf7480f8f56df18aed9dee438f639a6c3154
                     <div className="row">
                       <div className="d-flex flex-wrap justify-content-center align-items-center">
                         
