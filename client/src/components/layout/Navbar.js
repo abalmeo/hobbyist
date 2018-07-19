@@ -21,6 +21,7 @@ class Navbar extends Component {
 
   logout() {
     console.log("logging out");
+    this.setState({loggedin:false})
     //Remove toke from localstorage
     localStorage.removeItem('token',null); 
     //remove auth header for future requests
