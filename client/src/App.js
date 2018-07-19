@@ -7,6 +7,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UpdateProfile from "./components/pages/UpdateProfile";
 import Search from "./components/pages/Search";
+import UserPage from "./components/pages/UserPage"
 
 import './App.css';
 
@@ -31,10 +32,11 @@ class App extends Component {
         <div className="App">
           <Navbar />
           <Route exact path= "/" component={Landing} />
-          <div className="container">
+          <div className="container-fluid">
             <Route exact path="/register" component={Register} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/userpage" component={UserPage} />
             <Route exact path="/profile" component={UpdateProfile} />
           </div>
           <Footer />
