@@ -29,8 +29,8 @@ class UserPage extends Component {
     return !!token && !this.isTokenExpired(token)
   }
 
- 
-  
+
+
 
   componentDidMount() {
     axios.get("/api/profile", {
@@ -38,9 +38,10 @@ class UserPage extends Component {
         "Authorization": localStorage.getItem("token")
       }
     })
-      .then(res => { 
+      .then(res => {
         console.log(res.data);
         if (!this.loggedIn) {
+
           this.setState({redirectTo: "/login"});
       }
       else {
@@ -49,25 +50,37 @@ class UserPage extends Component {
         this.setState({profile: res.data, skills: res.data.skills});
         console.log(this.state.skills);
        })
+
+         
+      })
+
       .catch(err => this.setState({ errors: err.response.data }));
   }
 
 
   render() {
 
-   for (var i = 0; i < this.state.profile.length; i++) {
+    for (var i = 0; i < this.state.profile.length; i++) {
       return this.state.profile.user;
     }
 
     if (this.state.redirectTo) {
-      return <Redirect to={{ pathname: this.state.redirectTo}} />
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
     } else {
 
+
     return (
-      <div className="profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
+        <div className="profile">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="row">
+                  <div className="col-6">
+                    <a href="/editprofile" className="btn btn-light mb-3 float-left">Edit Profile</a>
+                  </div>
+                  <div className="col-6">
+                  </div>
+                </div>
               
 
 
@@ -99,14 +112,7 @@ class UserPage extends Component {
                   </div>
                 </div>
             
-
-
-
-
               
-                
-                  
-                  
               <ProfileCreds>
               
                     <ListItem 
@@ -114,14 +120,14 @@ class UserPage extends Component {
                       interests={this.state.profile.interests}
                     /> 
               </ProfileCreds>
-
+           
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    );
-  }
+      );
+    }
   }
 }
 

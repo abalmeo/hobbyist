@@ -6,10 +6,12 @@ import Landing from "./components/layout/Landing";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import UpdateProfile from "./components/pages/UpdateProfile";
+import EditProfile from "./components/pages/EditProfile";
 import Search from "./components/pages/Search";
 import UserPage from "./components/pages/UserPage"
 
 import './App.css';
+
 
 class App extends Component {
 
@@ -27,6 +29,7 @@ class App extends Component {
           <Route exact path= "/" component={Landing} />
           <div className="container-fluid">
             <Route exact path="/register" component={Register} />
+            <Route exact path="/editprofile" component={EditProfile} />
             <Route exact path="/search" component={Search} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/userpage" component={UserPage} />
