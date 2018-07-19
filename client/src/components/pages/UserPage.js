@@ -13,7 +13,7 @@ class UserPage extends Component {
     super(props);
     this.state = {
       username: "",
-      skills: "",
+      skills: [],
       equipment: "",
       interests: "",
       location: "",
@@ -41,15 +41,19 @@ class UserPage extends Component {
       .then(res => {
         console.log(res.data);
         if (!this.loggedIn) {
-          this.setState({ redirectTo: "/login" });
-        }
-        else {
-          console.log("you are logged in");
-        }
-        this.setState({
-          profile: res.data
-        });
+
+          this.setState({redirectTo: "/login"});
+      }
+      else {
+        console.log("you are logged in");
+      }
+        this.setState({profile: res.data, skills: res.data.skills});
+        console.log(this.state.skills);
+       })
+
+         
       })
+
       .catch(err => this.setState({ errors: err.response.data }));
   }
 
@@ -64,7 +68,8 @@ class UserPage extends Component {
       return <Redirect to={{ pathname: this.state.redirectTo }} />
     } else {
 
-      return (
+
+    return (
         <div className="profile">
           <div className="container">
             <div className="row">
@@ -76,29 +81,46 @@ class UserPage extends Component {
                   <div className="col-6">
                   </div>
                 </div>
+              
 
 
-
-
-
-                <ProfileHeader
-                  key={this.state.profile._id}
-                  name={this.state.profile.userName}
-                  location={this.state.profile.location}
-                  occupation={this.state.profile.occupation}
-                />
-                <About
-                  bio={this.state.profile.bio}
-
-                />
-                <ProfileCreds>
-
-                  <ListItem
-                    key={this.state.profile._id}
-                    interests={this.state.profile.interests}
-                  />
-                </ProfileCreds>
-
+              <ProfileHeader
+              key={this.state.profile._id}
+                name={this.state.profile.userName}
+                location={this.state.profile.location}
+                occupation={this.state.profile.occupation}
+              />
+               
+              <div className="col-md-12">
+                  <div className="card card-body bg-light mb-3">
+                    <h3 className="text-center text-info">Bio</h3>
+                    <p className="lead">{this.state.profile.bio}
+                </p>
+                    <hr />
+                    <h3 className="text-center text-info">Skill Set</h3>
+                    <div className="row">
+                      <div className="d-flex flex-wrap justify-content-center align-items-center">
+                        
+                        {this.state.skills.map((index) => (
+                          <div className="p-3">
+                          <i className="fa fa-check"></i>{index}
+                          </div>
+                        ))}
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+              
+              <ProfileCreds>
+              
+                    <ListItem 
+                      key={this.state.profile._id} 
+                      interests={this.state.profile.interests}
+                    /> 
+              </ProfileCreds>
+           
               </div>
             </div>
           </div>
