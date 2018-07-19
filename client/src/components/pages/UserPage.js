@@ -13,7 +13,7 @@ class UserPage extends Component {
     super(props);
     this.state = {
       username: "",
-      skills: "",
+      skills: [],
       equipment: "",
       interests: "",
       location: "",
@@ -46,8 +46,8 @@ class UserPage extends Component {
       else {
         console.log("you are logged in");
       }
-        this.setState({profile: res.data
-        });
+        this.setState({profile: res.data, skills: res.data.skills});
+        console.log(this.state.skills);
        })
       .catch(err => this.setState({ errors: err.response.data }));
   }
@@ -77,10 +77,36 @@ class UserPage extends Component {
                 location={this.state.profile.location}
                 occupation={this.state.profile.occupation}
               />
-              <About 
-                bio={this.state.profile.bio}
+               
+              <div className="col-md-12">
+                  <div className="card card-body bg-light mb-3">
+                    <h3 className="text-center text-info">Bio</h3>
+                    <p className="lead">{this.state.profile.bio}
+                </p>
+                    <hr />
+                    <h3 className="text-center text-info">Skill Set</h3>
+                    <div className="row">
+                      <div className="d-flex flex-wrap justify-content-center align-items-center">
+                        
+                        {this.state.skills.map((index) => (
+                          <div className="p-3">
+                          <i className="fa fa-check"></i>{index}
+                          </div>
+                        ))}
+                        
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            
+
+
+
+
               
-              />
+                
+                  
+                  
               <ProfileCreds>
               
                     <ListItem 
