@@ -44,7 +44,8 @@ componentDidMount() {
         interests: res.data.interests,
         location: res.data.location, 
         bio: res.data.bio, 
-        occupation: res.data.occupation
+        occupation: res.data.occupation.Authorization,
+        redirectTo: null
         });
       })
     .catch(err => this.setState({ errors: err.response.data }));
@@ -79,7 +80,8 @@ componentDidMount() {
             interests: this.state.interests,
             location: this.state.location,
             bio: this.state.bio,
-            occupation: this.state.occupation
+            occupation: this.state.occupation,
+            redirectTo:"/userpage"
         }
 
         axios.post('/api/profile', profile, {
