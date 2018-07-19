@@ -32,6 +32,10 @@ const ProfileSchema = new Schema({
         type: [String],
         required: true
     },
+    occupation: {
+        type: String,
+        required: false
+    },
     date: {
         type: Date,
         default: Date.Now
