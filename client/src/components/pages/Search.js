@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Card, CardItem } from "./profilecards";
 import { Col, Row, Container } from "./grid";
 import axios from "axios";
+import ListItem from '../layout/ListItem';
+import { runInThisContext } from 'vm';
 
 class Search extends Component {
     constructor() {
@@ -24,9 +26,10 @@ class Search extends Component {
         axios.get('api/profile/all')
             .then(res => {
                 console.log(res.data);
-                this.setState({ profiles: res.data })
+                this.setState({ profiles: res.data 
+                });
             })
-            .catch(err => console.log(err));
+            .catch(err => this.setState({ errors: err.response.data }));
     }
 
     onChange(e) {
@@ -41,6 +44,7 @@ class Search extends Component {
     }
 
     render() {
+        
         return (
                 <div>
             <form onSubmit={this.onSubmit}>
@@ -56,36 +60,21 @@ class Search extends Component {
                 <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
 
-            <Container fluid>
-                <Row>
-                    <Col size="md-6 sm-12">
+            {this.state.profiles.map(profile=>(
+            <ListItem
+                 key={profile._id}
+            >
+            <h1> {profile.bio} </h1>
+            </ListItem>
 
-                        <h1>Hobbyists</h1>
+            ))}
 
-                        {this.state.profiles.length ? (
-                            <Card>
-                                {this.state.profiles.map(profile => (
-                                    <CardItem key={profile._id}>
-                                    <h4>
-                                    Username:{profile.username} 
-                                    </h4>
-                                    <h4>
-                                    Skills:{profile.skills}
-                                    </h4>
-                                    </CardItem>
-                                ))}
-                            </Card>
-                        ) : (
-                                <h3>No Results to Display</h3>
-                            )}
-                    </Col>
-                </Row>
-
-            </Container>
-            </div>
-
-    )
+                    <h3> No Results to Display</h3>
+                </div>
+            
+            
+        )
+        }
     }
-}
 
 export default Search
