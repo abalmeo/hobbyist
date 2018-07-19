@@ -68,20 +68,13 @@ class UserPage extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="row">
-                <div className="col-6">
-                  <a href="/editprofile" className="btn btn-light mb-3 float-left">Edit Profile</a>
-                </div>
-                <div className="col-6">
-
-                </div>
-              </div>
-
 
 
               <ProfileHeader
               key={this.state.profile._id}
                 name={this.state.profile.userName}
+                location={this.state.profile.location}
+                occupation={this.state.profile.occupation}
               />
               <About 
                 bio={this.state.profile.bio}
