@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Card, CardItem } from "./profilecards";
 import { Col, Row, Container } from "./grid";
 import axios from "axios";
+import ListItem from '../layout/ListItem';
+import { runInThisContext } from 'vm';
 
 class Search extends Component {
     constructor() {
@@ -24,9 +26,10 @@ class Search extends Component {
         axios.get('api/profile/all')
             .then(res => {
                 console.log(res.data);
-                this.setState({ profiles: res.data })
+                this.setState({ profiles: res.data 
+                });
             })
-            .catch(err => console.log(err));
+            .catch(err => this.setState({ errors: err.response.data }));
     }
 
     onChange(e) {
@@ -56,17 +59,20 @@ class Search extends Component {
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
+            {this.state.profiles.map(profile=>(
+            <ListItem
+                 key={profile._id}
+                 ssssdd
+            >
+            <h1> {profile.bio} </h1>
+            </ListItem>
 
-                
-            <h1>
-                Test
-                {this.state.profiles.length?(
-                <h2>{this.state.profiles[2]._id[0 ]}</h2>
-                ):(
+            ))}
+
                     <h3> No Results to Display</h3>
-                )}
-            </h1>
-            </div>
+                </div>
+            
+            
         )
         }
     }
