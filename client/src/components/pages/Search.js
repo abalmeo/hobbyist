@@ -41,6 +41,7 @@ class Search extends Component {
     }
 
     render() {
+        
         return (
                 <div>
             <form onSubmit={this.onSubmit}>
@@ -56,36 +57,18 @@ class Search extends Component {
                 <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
 
-            <Container fluid>
-                <Row>
-                    <Col size="md-6 sm-12">
-
-                        <h1>Hobbyists</h1>
-
-                        {this.state.profiles.length ? (
-                            <Card>
-                                {this.state.profiles.map(profile => (
-                                    <CardItem key={profile._id}>
-                                    <h4>
-                                    Username:{profile.username} 
-                                    </h4>
-                                    <h4>
-                                    Skills:{profile.skills}
-                                    </h4>
-                                    </CardItem>
-                                ))}
-                            </Card>
-                        ) : (
-                                <h3>No Results to Display</h3>
-                            )}
-                    </Col>
-                </Row>
-
-            </Container>
+                
+            <h1>
+                Test
+                {this.state.profiles.length?(
+                <h2>{this.state.profiles[2]._id[0 ]}</h2>
+                ):(
+                    <h3> No Results to Display</h3>
+                )}
+            </h1>
             </div>
-
-    )
+        )
+        }
     }
-}
 
 export default Search
