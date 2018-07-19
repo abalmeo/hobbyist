@@ -42,8 +42,12 @@ class Login extends Component {
             })
               .then(
                   res => {console.log(res.data);
+
                     console.log(res.data.user._id);
-                  this.setState({redirectTo: "/"})
+
+
+                  this.setState({redirectTo: "/userpage"})
+
                 
               }
             )

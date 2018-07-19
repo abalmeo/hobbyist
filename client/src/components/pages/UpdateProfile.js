@@ -14,17 +14,27 @@ class UpdateProfile extends Component {
             location:"",
             bio:"", 
             errors: {},
-            redirectTo: null
+            redirectTo: null,
+            selectedFile: null
         }
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
 
+
     loggedIn() {
         // Checks if there is a saved token and it's still valid
         const token = this.getToken("token") // GEtting token from localstorage
         return !!token && !this.isTokenExpired(token) // handwaiving here
+    }
+
+    fileChangedHandler = (event) => {
+        this.setState({selectedFile: event.target.files[0]})
+    }
+
+    uploadHandler = () => { 
+        console.log(this.state.selectedFile)
     }
 
     onChange(e) {
@@ -54,7 +64,7 @@ class UpdateProfile extends Component {
                 this.setState({redirectTo: "/login"});
             }
             else {
-                this.setState({redirectTo: "/"});
+                this.setState({redirectTo: "/userpage"});
             }
         })
         .catch(err => this.setState({errors: err.response.data}));
@@ -162,7 +172,21 @@ class UpdateProfile extends Component {
                                         {errors.bio && (<div className="invalid-feeback">{errors.bio}</div>)}
                                     </div>
 
-                                    <input type="submit" className="btn btn-info btn-block mt-4" />
+                                    {/*Photo*/}
+                                    <div className="form-group">
+                                        <input 
+                                            type="file" 
+                                            className={classnames("form-control form-control-lg")}  
+                                            placeholder="User Photo" 
+                                            name="photo" 
+                                            onChange={this.fileChangedHandler}
+                                        />
+                                        {errors.bio && (<div className="invalid-feeback">{errors.bio}</div>)}
+                                    </div>
+
+                                    <input type="submit"
+                                     onClick={this.uploadHandler}
+                                     className="btn btn-info btn-block mt-4" />
                                 </form>
                             </div>
                         </div>
