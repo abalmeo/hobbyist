@@ -41,7 +41,7 @@ class Login extends Component {
             })
               .then(
                   res => {console.log(res.data);
-                  this.setState({redirectTo: "/"})
+                  this.setState({redirectTo: "/userpage"})
                 
               }
             )
