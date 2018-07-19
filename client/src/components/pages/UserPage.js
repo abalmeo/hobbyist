@@ -50,11 +50,7 @@ class UserPage extends Component {
         this.setState({profile: res.data, skills: res.data.skills});
         console.log(this.state.skills);
        })
-
-         
-      })
-
-      .catch(err => this.setState({ errors: err.response.data }));
+       .catch(err => this.setState({ errors: err.response.data }));
   }
 
 
@@ -74,13 +70,7 @@ class UserPage extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                <div className="row">
-                  <div className="col-6">
-                    <a href="/editprofile" className="btn btn-light mb-3 float-left">Edit Profile</a>
-                  </div>
-                  <div className="col-6">
-                  </div>
-                </div>
+                
               
 
 
@@ -120,12 +110,17 @@ class UserPage extends Component {
                       interests={this.state.profile.interests}
                     /> 
               </ProfileCreds>
+
+              <div className="row">
+                  <div className="col-12 ">
+                    <a href="/editprofile" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Edit Profile</a>
+                  </div>
+                </div>
            
               </div>
             </div>
           </div>
         </div>
-
       );
     }
   }
