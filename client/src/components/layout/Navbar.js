@@ -21,9 +21,10 @@ class Navbar extends Component {
 
   logout() {
     console.log("logging out");
+    localStorage.removeItem('token'); 
     this.setState({loggedin:false})
     //Remove toke from localstorage
-    localStorage.removeItem('token',null); 
+    
     //remove auth header for future requests
     delete Axios.defaults.headers.common['Authorization'];
     //
