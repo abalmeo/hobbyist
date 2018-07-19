@@ -68,15 +68,7 @@ class UserPage extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <div className="row">
-                <div className="col-6">
-                  <a href="profiles.html" className="btn btn-light mb-3 float-left">Back To Profiles</a>
-                </div>
-                <div className="col-6">
-
-                </div>
-              </div>
-
+              
 
 
               <ProfileHeader
