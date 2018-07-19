@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from "axios";
 import ListItem from '../layout/ListItem';
 import { runInThisContext } from 'vm';
+import TreeLogoLg from '../../img/TreeLogoLg.png';
 
 class Search extends Component {
     constructor() {
@@ -63,7 +64,7 @@ class Search extends Component {
                     <div className="card card-body bg-light mb-3">
                         <div className="row">
                             <div className="col-2">
-                                <img className="rounded-circle" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200" alt="" />
+                                <img className="rounded-circle" src={TreeLogoLg} alt="" />
                             </div>
                             <div className="col-lg-6 col-md-4 col-8">
                                 <h3>{profile.userName}</h3>

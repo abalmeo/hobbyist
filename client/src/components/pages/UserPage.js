@@ -74,6 +74,8 @@ class UserPage extends Component {
               <ProfileHeader
               key={this.state.profile._id}
                 name={this.state.profile.userName}
+                location={this.state.profile.location}
+                occupation={this.state.profile.occupation}
               />
               <About 
                 bio={this.state.profile.bio}
