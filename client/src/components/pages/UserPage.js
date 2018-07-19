@@ -29,8 +29,8 @@ class UserPage extends Component {
     return !!token && !this.isTokenExpired(token)
   }
 
- 
-  
+
+
 
   componentDidMount() {
     axios.get("/api/profile", {
@@ -38,63 +38,74 @@ class UserPage extends Component {
         "Authorization": localStorage.getItem("token")
       }
     })
-      .then(res => { 
+      .then(res => {
         console.log(res.data);
         if (!this.loggedIn) {
-          this.setState({redirectTo: "/login"});
-      }
-      else {
-        console.log("you are logged in");
-      }
-        this.setState({profile: res.data
+          this.setState({ redirectTo: "/login" });
+        }
+        else {
+          console.log("you are logged in");
+        }
+        this.setState({
+          profile: res.data
         });
-       })
+      })
       .catch(err => this.setState({ errors: err.response.data }));
   }
 
 
   render() {
 
-   for (var i = 0; i < this.state.profile.length; i++) {
+    for (var i = 0; i < this.state.profile.length; i++) {
       return this.state.profile.user;
     }
 
     if (this.state.redirectTo) {
-      return <Redirect to={{ pathname: this.state.redirectTo}} />
+      return <Redirect to={{ pathname: this.state.redirectTo }} />
     } else {
 
-    return (
-      <div className="profile">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
+      return (
+        <div className="profile">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12">
+                <div className="row">
+                  <div className="col-6">
+                    <a href="/editprofile" className="btn btn-light mb-3 float-left">Edit Profile</a>
+                  </div>
+                  <div className="col-6">
+                  </div>
+                </div>
 
 
-              <ProfileHeader
-              key={this.state.profile._id}
-                name={this.state.profile.userName}
-                location={this.state.profile.location}
-                occupation={this.state.profile.occupation}
-              />
-              <About 
-                bio={this.state.profile.bio}
-              
-              />
-              <ProfileCreds>
-              
-                    <ListItem 
-                      key={this.state.profile._id} 
-                      interests={this.state.profile.interests}
-                    /> 
-              </ProfileCreds>
 
+
+
+                <ProfileHeader
+                  key={this.state.profile._id}
+                  name={this.state.profile.userName}
+                  location={this.state.profile.location}
+                  occupation={this.state.profile.occupation}
+                />
+                <About
+                  bio={this.state.profile.bio}
+
+                />
+                <ProfileCreds>
+
+                  <ListItem
+                    key={this.state.profile._id}
+                    interests={this.state.profile.interests}
+                  />
+                </ProfileCreds>
+
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    );
-  }
+      );
+    }
   }
 }
 
