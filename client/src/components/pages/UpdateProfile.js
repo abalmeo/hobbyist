@@ -7,12 +7,13 @@ class UpdateProfile extends Component {
     constructor() {
         super();
         this.state = {
-            username: "", 
+            username: "",
             skills: "",
             equipment: "",
             interests: "",
-            location:"",
-            bio:"", 
+            location: "",
+            bio: "",
+            occupation: "",
             errors: {},
             redirectTo: null,
             selectedFile: null
@@ -30,27 +31,28 @@ class UpdateProfile extends Component {
     }
 
     fileChangedHandler = (event) => {
-        this.setState({selectedFile: event.target.files[0]})
+        this.setState({ selectedFile: event.target.files[0] })
     }
 
-    uploadHandler = () => { 
+    uploadHandler = () => {
         console.log(this.state.selectedFile)
     }
 
     onChange(e) {
-        this.setState({[e.target.name]: e.target.value});
+        this.setState({ [e.target.name]: e.target.value });
     }
 
     onSubmit(e) {
         e.preventDefault();
 
         const profile = {
-            userName: this.state.username, 
+            userName: this.state.username,
             skills: this.state.skills,
             equipment: this.state.equipment,
             interests: this.state.interests,
             location: this.state.location,
-            bio: this.state.bio
+            bio: this.state.bio,
+            occupation: this.state.occupation
         }
 
         axios.post('/api/profile', profile, {
@@ -58,24 +60,24 @@ class UpdateProfile extends Component {
                 "Authorization": localStorage.getItem("token")
             }
         })
-        .then(res => {
-            console.log(res.data)
-            if (!this.loggedIn) {
-                this.setState({redirectTo: "/login"});
-            }
-            else {
-                this.setState({redirectTo: "/userpage"});
-            }
-        })
-        .catch(err => this.setState({errors: err.response.data}));
+            .then(res => {
+                console.log(res.data)
+                if (!this.loggedIn) {
+                    this.setState({ redirectTo: "/login" });
+                }
+                else {
+                    this.setState({ redirectTo: "/userpage" });
+                }
+            })
+            .catch(err => this.setState({ errors: err.response.data }));
     }
 
 
     render() {
         const { errors } = this.state;
         if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo}} />
-          } else {
+            return <Redirect to={{ pathname: this.state.redirectTo }} />
+        } else {
 
             return (
                 <div className="register">
@@ -86,107 +88,122 @@ class UpdateProfile extends Component {
                                 <p className="lead text-center">Profile</p>
                                 <form noValidate onSubmit={this.onSubmit}>
 
-                                {/*Username*/}
+                                    {/*Username*/}
                                     <div className="form-group">
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.username
-                                            })} 
-                                            placeholder="Username" 
-                                            name="username" 
-                                            value={this.state.username} 
+                                            })}
+                                            placeholder="Username"
+                                            name="username"
+                                            value={this.state.username}
                                             onChange={this.onChange}
                                         />
                                         {errors.username && (<div className="invalid-feeback">{errors.username}</div>)}
                                     </div>
 
 
-                                {/*skills*/}
+                                    {/*skills*/}
                                     <div className="form-group">
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.skills
-                                            })}  
-                                            placeholder="Skills" 
-                                            name="skills" value={this.state.skills} 
-                                            onChange={this.onChange} 
+                                            })}
+                                            placeholder="Skills"
+                                            name="skills" value={this.state.skills}
+                                            onChange={this.onChange}
                                         />
                                         {errors.skills && (<div className="invalid-feeback">{errors.skills}</div>)}
                                     </div>
 
-                                {/*equipment*/}
+                                    {/*equipment*/}
                                     <div className="form-group">
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.equipment
-                                            })}  
-                                            placeholder="Equipment" 
-                                            name="equipment" value={this.state.equipment} 
+                                            })}
+                                            placeholder="Equipment"
+                                            name="equipment" value={this.state.equipment}
                                             onChange={this.onChange}
                                         />
                                         {errors.equipment && (<div className="invalid-feeback">{errors.equipment}</div>)}
                                     </div>
-                                {/*interests*/}
+                                    {/*interests*/}
                                     <div className="form-group">
-                                        <input 
-                                            type="text" 
+                                        <input
+                                            type="text"
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.interests
-                                            })}  
-                                            placeholder="Interests" 
-                                            name="interests" 
-                                            value={this.state.interests} 
+                                            })}
+                                            placeholder="Interests"
+                                            name="interests"
+                                            value={this.state.interests}
                                             onChange={this.onChange}
                                         />
                                         {errors.interests && (<div className="invalid-feeback">{errors.interests}</div>)}
                                     </div>
-                                {/*location*/}
-                                <div className="form-group">
-                                        <input 
-                                            type="text" 
+                                    {/*location*/}
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.location
-                                            })}  
-                                            placeholder="Location" 
-                                            name="location" 
-                                            value={this.state.location} 
+                                            })}
+                                            placeholder="Location"
+                                            name="location"
+                                            value={this.state.location}
                                             onChange={this.onChange}
                                         />
                                         {errors.location && (<div className="invalid-feeback">{errors.location}</div>)}
                                     </div>
-                                {/*Bio*/}
-                                <div className="form-group">
-                                        <input 
-                                            type="text" 
+                                    {/*Bio*/}
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
                                             className={classnames("form-control form-control-lg", {
                                                 "is-invalid": errors.bio
-                                            })}  
-                                            placeholder="Bio" 
-                                            name="bio" 
-                                            value={this.state.bio} 
+                                            })}
+                                            placeholder="Bio"
+                                            name="bio"
+                                            value={this.state.bio}
                                             onChange={this.onChange}
                                         />
                                         {errors.bio && (<div className="invalid-feeback">{errors.bio}</div>)}
                                     </div>
 
+                                    {/*occupation*/}
+                                    <div className="form-group">
+                                        <input
+                                            type="text"
+                                            className={classnames("form-control form-control-lg", {
+                                                "is-invalid": errors.occupation
+                                            })}
+                                            placeholder="Occupation"
+                                            name="occupation"
+                                            value={this.state.occupation}
+                                            onChange={this.onChange}
+                                        />
+                                        {errors.occupation && (<div className="invalid-feeback">{errors.occupation}</div>)}
+                                    </div>
+
                                     {/*Photo*/}
                                     <div className="form-group">
-                                        <input 
-                                            type="file" 
-                                            className={classnames("form-control form-control-lg")}  
-                                            placeholder="User Photo" 
-                                            name="photo" 
+                                        <input
+                                            type="file"
+                                            className={classnames("form-control form-control-lg")}
+                                            placeholder="User Photo"
+                                            name="photo"
                                             onChange={this.fileChangedHandler}
                                         />
                                         {errors.bio && (<div className="invalid-feeback">{errors.bio}</div>)}
                                     </div>
 
                                     <input type="submit"
-                                     onClick={this.uploadHandler}
-                                     className="btn btn-info btn-block mt-4" />
+                                        onClick={this.uploadHandler}
+                                        className="btn btn-info btn-block mt-4" />
                                 </form>
                             </div>
                         </div>

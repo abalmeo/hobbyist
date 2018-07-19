@@ -62,22 +62,26 @@ router.post('/',
      if(req.body.userName) profileInputs.userName = req.body.userName;
      if(req.body.location) profileInputs.location = req.body.location;
      if(req.body.bio) profileInputs.bio = req.body.bio;
+     if(req.body.occupation) profileInputs.occupation = req.body.occupation;
      //The next tnree inputs need to separated to be put into an array.
         if (typeof req.body.skills !== 'undefined') {
-            profileInputs.skills = req.body.skills.split(',').map(function(item){
-                return item.trim();
-            });
+            profileInputs.skills = req.body.skills.split(',')
+            // .map(function(item){
+            //     return item.trim();
+            // });
         }
         if (typeof req.body.equipment !== 'undefined') {
-            profileInputs.equipment = req.body.equipment.split(',').map(function(item){
-                return item.trim();
-            });
+            profileInputs.equipment = req.body.equipment.split(',')
+            // .map(function(item){
+            //     return item.trim();
+            // });
         }
 
         if (typeof req.body.interests !== 'undefined') {
-            profileInputs.interests = req.body.interests.split(',').map(function(item){
-                return item.trim();
-            });
+            profileInputs.interests = req.body.interests.split(',')
+            // .map(function(item){
+            //     return item.trim();
+            // });
         }
 
         Profile.findOne({ user: req.user.id })
@@ -164,7 +168,7 @@ router.get('/all', (req, res) => {
         res.json(profiles)
     })
     .catch(err => {
-        res.status(404).json({profile: 'There are no profiles'}); 
+       (err => res.status(404).json({err, profile: 'There are no profiles'}) ); 
     })
 })
 

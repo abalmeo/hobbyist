@@ -29,6 +29,8 @@ class UserPage extends Component {
     return !!token && !this.isTokenExpired(token)
   }
 
+ 
+  
 
   componentDidMount() {
     axios.get("/api/profile", {
@@ -52,6 +54,11 @@ class UserPage extends Component {
 
 
   render() {
+
+   for (var i = 0; i < this.state.profile.length; i++) {
+      return this.state.profile.user;
+    }
+
     if (this.state.redirectTo) {
       return <Redirect to={{ pathname: this.state.redirectTo}} />
     } else {
@@ -73,6 +80,7 @@ class UserPage extends Component {
 
 
               <ProfileHeader
+              key={this.state.profile._id}
                 name={this.state.profile.userName}
               />
               <About 
@@ -80,10 +88,11 @@ class UserPage extends Component {
               
               />
               <ProfileCreds>
+              
                     <ListItem 
-                      key={this.state.profile._id}
+                      key={this.state.profile._id} 
                       interests={this.state.profile.interests}
-                  />
+                    /> 
               </ProfileCreds>
 
             </div>
