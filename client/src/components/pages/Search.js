@@ -59,10 +59,10 @@ class Search extends Component {
                 </div>
                 <input type="submit" className="btn btn-info btn-block mt-4" />
             </form>
+
             {this.state.profiles.map(profile=>(
             <ListItem
                  key={profile._id}
-                 ssssdd
             >
             <h1> {profile.bio} </h1>
             </ListItem>
