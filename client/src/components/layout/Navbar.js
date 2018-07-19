@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import TreeLogo from '../../img/TreeLogo.png';
 import TreeLogoLg from '../../img/TreeLogoLg.png';
+import Axios from '../../../node_modules/axios';
 
 class Navbar extends Component {
   constructor() {
@@ -17,6 +18,18 @@ class Navbar extends Component {
     }
 
   }
+
+  logout() {
+    console.log("logging out");
+    //Remove toke from localstorage
+    localStorage.removeItem('token',null); 
+    //remove auth header for future requests
+    delete Axios.defaults.headers.common['Authorization'];
+    //
+    
+  }
+
+
 
   render() {
     const isLoggedIn = this.state.loggedin;
@@ -46,7 +59,7 @@ class Navbar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item mr-4">
-                  <Link className="nav-link" to="/login">
+                  <Link className="nav-link" to="/login" onClick={this.logout}>
                     Logout
                   </Link>
                 </li>
@@ -60,7 +73,7 @@ class Navbar extends Component {
                      </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/login">
+                    <Link className="nav-link" to="/login" >
                       Login
                     </Link>
                   </li>
