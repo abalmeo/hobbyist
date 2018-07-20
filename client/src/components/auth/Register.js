@@ -59,7 +59,7 @@ class Register extends Component {
           } else {
 
             return (
-                <div className="register">
+                <div>
                     <div className="container">
                         <div className="row">
                             <div className="col-md-8 m-auto">
@@ -90,7 +90,7 @@ class Register extends Component {
                                             onChange={this.onChange} 
                                         />
                                         {errors.email && (<div className="invalid-feeback">{errors.email}</div>)}
-                                        <small className="form-text text-muted">This site uses Gravatar so if you want a profile image, use a Gravatar email</small>
+                                        
                                     </div>
                                     <div className="form-group">
                                         <input 
@@ -117,7 +117,7 @@ class Register extends Component {
                                         />
                                         {errors.password2 && (<div className="invalid-feeback">{errors.password2}</div>)}
                                     </div>
-                                    <input type="submit" className="btn btn-info btn-block mt-4" />
+                                    <input type="submit" className="btn ojbtn btn-block mt-4" />
                                 </form>
                             </div>
                         </div>

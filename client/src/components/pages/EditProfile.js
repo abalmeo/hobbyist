@@ -238,7 +238,7 @@ render() {
                                 <input type="submit"
                                     
                                     onClick={this.uploadHandler}
-                                    className="btn btn-info btn-block mt-4" />
+                                    className="btn landbtn btn-block mt-4" />
                             </form>
                         </div>
                     </div>
