@@ -83,21 +83,24 @@ class UserPage extends Component {
                
               <div className="col-md-12">
                   <div className="card card-body bg-light mb-3">
-                    <h3 className="text-center text-info">Bio</h3>
+                    <h3 className="text-center">Bio</h3>
                     <p className="lead">{this.state.profile.bio}
                 </p>
                     <hr />
+
                     <h3 className="text-center text-info">Skills</h3>
                     <div className="row">
                       <div className="d-flex flex-wrap justify-content-center align-items-center">
                         
                         {this.state.skills.map((index) => (
                           <div className="p-3">
+
                           <ul>
                             <li>
                           {index}
                           </li>
                           </ul>
+
                           </div>
                         ))}
                         
@@ -117,7 +120,7 @@ class UserPage extends Component {
 
               <div className="row">
                   <div className="col-12 ">
-                    <a href="/editprofile" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Edit Profile</a>
+                    <a href="/editprofile" className="btn landbtn mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Edit Profile</a>
                   </div>
                 </div>
            

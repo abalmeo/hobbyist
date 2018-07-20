@@ -68,6 +68,8 @@ class Search extends Component {
 
        
             <div>
+                <div className="row justify-content-start">
+                <div className="col-lg-4">
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <input
@@ -77,9 +79,13 @@ class Search extends Component {
                             value={this.state.query}
                             onChange={this.onChange}
                         />
+                        <br/>
+                        <input type="submit" className="btn landbtn mt-4" />
                     </div>
-                    <input type="submit" className="btn btn-info btn-block mt-4" />
+                    
                 </form>
+                </div>
+                </div>
 
                 {this.state.profiles.map(profile => (
                     <div className="card card-body bg-light mb-3">

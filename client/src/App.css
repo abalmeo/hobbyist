@@ -54,13 +54,34 @@ img {
   color: #bbb !important;
 }
 
-.register {
+/* Orange Button */
+.ojbtn {
   background: #ffbd4a; 
+  color: black;
+  font-weight: bold;
+}
+
+.ojbtn:hover {
+  background: #ffbd4a; 
+  opacity: 0.9;
   color: black;
 }
 
-.register:hover {
+/* Landing Page Buttons */
+.landbtn {
+  background: #ffbd4a; 
+  color: black;
+  font-weight: normal;
+}
+
+.landbtn:hover {
   background: #ffbd4a; 
   opacity: 0.9;
+  color: black;
+}
+
+/* profileHeader */
+.profileHeader {
+  background: rgb(52, 53, 56);
   color: black;
 }
