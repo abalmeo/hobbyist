@@ -14,8 +14,8 @@ class UserPage extends Component {
     this.state = {
       username: "",
       skills: [],
-      equipment: "",
-      interests: "",
+      equipment: [],
+      interests: [],
       location: "",
       bio: "",
       errors: {},
@@ -87,13 +87,17 @@ class UserPage extends Component {
                     <p className="lead">{this.state.profile.bio}
                 </p>
                     <hr />
-                    <h3 className="text-center text-info">Skill Set</h3>
+                    <h3 className="text-center text-info">Skills</h3>
                     <div className="row">
                       <div className="d-flex flex-wrap justify-content-center align-items-center">
                         
                         {this.state.skills.map((index) => (
                           <div className="p-3">
-                          <i className="fa fa-check"></i>{index}
+                          <ul>
+                            <li>
+                          {index}
+                          </li>
+                          </ul>
                           </div>
                         ))}
                         

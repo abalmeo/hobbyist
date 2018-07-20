@@ -9,7 +9,7 @@ import UpdateProfile from "./components/pages/UpdateProfile";
 import EditProfile from "./components/pages/EditProfile";
 import Search from "./components/pages/Search";
 import UserPage from "./components/pages/UserPage"
-
+import axios from "axios";
 import './App.css';
 
 
@@ -17,8 +17,11 @@ class App extends Component {
 
   constructor() {
     super();
-      
+
   }
+
+      
+
 
   render() {
     return (

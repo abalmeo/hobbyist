@@ -10,11 +10,15 @@ class Search extends Component {
         this.state = {
             query: '',
             profiles: [],
-            errors: {}
+            errors: {},
+            redirectTo: null,
+            redirectToUser: false
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        
     }
+
 
     componentDidMount() {
         this.getProfile();
@@ -32,9 +36,24 @@ class Search extends Component {
             .catch(err => this.setState({ errors: err.response.data }));
     }
 
+    getUserProfile(username) {
+        console.log("testing");
+        axios.get('api/profile/id/' + username)
+            .then(res => { 
+                console.log(res.data)
+            })
+            .catch(err => this.setState({ errors: err.response.data }));
+            if(username){
+                this.setState({redirectToUser:true})
+            }
+    }
+
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
     }
+
+
+
     onSubmit(e) {
         e.preventDefault();
         const searchUser = {
@@ -46,6 +65,8 @@ class Search extends Component {
     render() {
 
         return (
+
+       
             <div>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
@@ -70,7 +91,21 @@ class Search extends Component {
                                 <h3>{profile.userName}</h3>
                                 <p>{profile.occupation}</p>
                                 <p>{profile.location}</p>
-                                <a href="profile.html" value={profile.user} className="btn btn-info">View Profile</a>
+
+                                <a href="profile.html" 
+                                value={profile.userName} 
+                                onclick={() => this.getUserProfile(profile.userName)}
+                                className="btn btn-info">
+                                View Profile
+                                </a>
+
+                                <a href="profile.html" 
+                                value={profile.userName} 
+                                onclick={() => this.getUserProfile(profile.user)}
+                                className="btn btn-info">
+                                Connect
+                                </a>
+
                             </div>
                             <div className="col-md-4 d-none d-lg-block">
                                 <h4>Skill Set</h4>
@@ -78,7 +113,7 @@ class Search extends Component {
 
                             
                                 <li className="list-group-item">
-                                    <i className="fa fa-check pr-1"></i>{profile.skills}</li>
+                                    {profile.skills}</li>
                                 </ul>
                             </div>
                         </div>
@@ -86,9 +121,11 @@ class Search extends Component {
 
                 ))}
             </div>
-
+      
+        
 
         )
+    
     }
 }
 

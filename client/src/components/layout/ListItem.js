@@ -3,11 +3,13 @@ import React from 'react';
 
 export default (props) => {
     return (
-        <ul className="list-group">
-            <li className="list-group-item">
+        <div>
+        <ul>
+            <li>
                 {props.interests}
             </li>
         </ul>
+        </div> 
         
     );
 };

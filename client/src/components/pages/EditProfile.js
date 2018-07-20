@@ -8,9 +8,9 @@ class EditProfile extends Component {
         super();
         this.state = {
             username: "",
-            skills: "",
-            equipment: "",
-            interests: "",
+            skills: [],
+            equipment: [],
+            interests: [],
             location: "",
             bio: "",
             occupation: "",
