@@ -40,7 +40,7 @@ class Navbar extends Component {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/userpage">
+          <Link className="navbar-brand" to="/">
             <img className="img-fluid nav-logo" src={TreeLogo} />
           </Link>
           <button
@@ -56,6 +56,12 @@ class Navbar extends Component {
           {isLoggedIn ? (
             <div className="collapse navbar-collapse" id="mobile-nav">
               <ul className="navbar-nav ml-auto">
+              <li className="nav-item">
+                  <Link className="nav-link" to="/userpage">
+                    {' '}
+                    Home
+                  </Link>
+                </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/search">
                     {' '}
@@ -71,6 +77,12 @@ class Navbar extends Component {
             </div>) : (
               <div className="collapse navbar-collapse" id="mobile-nav">
                 <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/search">
+                    {' '}
+                    Enthusiasts
+                  </Link>
+                </li>
                   <li className="nav-item">
                     <Link className="nav-link" to="/register">
                       Sign Up
