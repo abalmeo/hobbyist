@@ -76,7 +76,9 @@ class Search extends Component {
                                 <h3>{profile.userName}</h3>
                                 <p>{profile.occupation}</p>
                                 <p>{profile.location}</p>
-                                <a href="profile.html" value={profile.user} className="btn landbtn">View Profile</a>
+                                <a href="/SearchedUser" value={profile.user} className="btn btn-info">View Profile</a>
+                                <a href="/message" class="btn btn-dark ml-1">Message</a>
+
                             </div>
                             <div className="col-md-4 d-none d-lg-block">
                                 <h4>Skill Set</h4>
