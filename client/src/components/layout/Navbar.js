@@ -21,8 +21,12 @@ class Navbar extends Component {
 
   logout() {
     console.log("logging out");
+    localStorage.removeItem('token'); 
+    
+    this.setState({
+      loggedin:false})
     //Remove toke from localstorage
-    localStorage.removeItem('token',null); 
+    
     //remove auth header for future requests
     delete Axios.defaults.headers.common['Authorization'];
     //
@@ -73,6 +77,12 @@ class Navbar extends Component {
             </div>) : (
               <div className="collapse navbar-collapse" id="mobile-nav">
                 <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                  <Link className="nav-link" to="/search">
+                    {' '}
+                    Enthusiasts
+                  </Link>
+                </li>
                   <li className="nav-item">
                   <Link className="nav-link" to="/search">
                       {' '}
