@@ -39,6 +39,10 @@ const ProfileSchema = new Schema({
     date: {
         type: Date,
         default: Date.Now
+    },
+    connections: {
+        type:[String],
+        required: false
     }
 })
 
