@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import { Link } from "react-router-dom";
 import ListItem from '../layout/ListItem';
 import { runInThisContext } from 'vm';
 import TreeLogoLg from '../../img/TreeLogoLg.png';
@@ -40,9 +41,13 @@ class Search extends Component {
         const searchUser = {
             query: this.state.query
         }
+    }
+
+    onClick() {
 
     }
 
+    
     render() {
 
         return (
@@ -76,7 +81,9 @@ class Search extends Component {
                                 <h3>{profile.userName}</h3>
                                 <p>{profile.occupation}</p>
                                 <p>{profile.location}</p>
-                                <a href="/SearchedUser" value={profile.user} className="btn btn-info">View Profile</a>
+                                <Link className="nav-link" to={`/user/${profile.userName}`}>
+                                    <a value={profile.userName} className="btn btn-info">View Profile</a>
+                                </Link>
                                 <a href="/message" class="btn btn-dark ml-1">Message</a>
 
                             </div>

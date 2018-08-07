@@ -16,7 +16,6 @@ class Navbar extends Component {
     if (localStorage.getItem("token")) {
       this.setState({ loggedin: true })
     }
-
   }
 
   logout() {

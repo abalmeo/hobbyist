@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import About from "../../components/layout/About"
 import ProfileHeader from "../../components/layout/ProfileHeader"
 import ProfileCreds from "../../components/layout/ProfileCreds"
 import ListItem from "../../components/layout/ListItem"
@@ -30,8 +29,6 @@ class UserPage extends Component {
   }
 
 
-
-
   componentDidMount() {
     axios.get("/api/profile", {
       headers: {
@@ -39,9 +36,9 @@ class UserPage extends Component {
       }
     })
       .then(res => {
+        console.log(localStorage.getItem("token"))
         console.log(res.data);
         if (!this.loggedIn) {
-
           this.setState({redirectTo: "/login"});
       }
       else {
