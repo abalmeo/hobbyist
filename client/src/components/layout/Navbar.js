@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import TreeLogo from '../../img/TreeLogo.png';
-import TreeLogoLg from '../../img/TreeLogoLg.png';
 
 class Navbar extends Component {
   constructor() {
