@@ -95,7 +95,7 @@ class SearchedUser extends Component {
                         
                         {this.state.skills.map((index) => (
                           <div className="p-3">
-                          <i className="fa fa-check"></i>{index}
+                            {index}
                           </div>
                         ))}
                         
@@ -115,7 +115,7 @@ class SearchedUser extends Component {
 
               <div className="row">
                   <div className="col-12 ">
-                    <a href="/editprofile" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Edit Profile</a>
+                    <a href="/editprofile" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
                   </div>
                 </div>
            
