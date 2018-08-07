@@ -16,10 +16,10 @@ class Landing extends Component {
                   Become an enthusiast. Create a profile, share your skills, interests and get connected with others.
                 </p>
                 <hr />
-                <Link to="/register" className="btn btn-lg register mr-2">
+                <Link to="/register" className="btn btn-lg landbtn mr-2">
                   Sign Up
                 </Link>
-                <Link to="/login" className="btn btn-lg btn-light">
+                <Link to="/login" className="btn btn-lg landbtn">
                   Login
                 </Link>
               </div>
