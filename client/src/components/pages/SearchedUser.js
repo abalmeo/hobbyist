@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import About from "../../components/layout/About"
+// import About from "../../components/layout/About"
 import ProfileHeader from "../../components/layout/ProfileHeader"
 import ProfileCreds from "../../components/layout/ProfileCreds"
 import ListItem from "../../components/layout/ListItem"
@@ -33,7 +33,9 @@ class SearchedUser extends Component {
 
 
   componentDidMount() {
-    axios.get("/api/profile", {
+    const { match: { params } } = this.props;
+
+    axios.get(`/api/profile/username/${params.username}`, {
       headers: {
         "Authorization": localStorage.getItem("token")
       }

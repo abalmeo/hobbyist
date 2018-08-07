@@ -36,7 +36,7 @@ class App extends Component {
             <Route exact path="/search" component={Search} />
             <Route exact path="/message" component={Message} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/searcheduser" component={SearchedUser} />
+            <Route exact path={"/user/:username"} component={SearchedUser} />
             <Route exact path="/userpage" component={UserPage} />
             <Route exact path="/profile" component={UpdateProfile} />
           </div>
