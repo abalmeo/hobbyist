@@ -115,7 +115,7 @@ class SearchedUser extends Component {
 
               <div className="row">
                   <div className="col-12 ">
-                    <a href="/editprofile" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Edit Profile</a>
+                    <a href="/message" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
                   </div>
                 </div>
            
