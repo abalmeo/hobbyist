@@ -40,6 +40,11 @@ router.get(
     }
   );
 
+//POST api/profile/connection
+//Add connections
+//Private route
+
+
 //POST api/profile
 //Create or Edit user profile
 //Private route
@@ -54,66 +59,28 @@ router.post('/',
                 return res.status(400).json(errors); 
 
             }
-        
-
+    
      // Get inputs
      const profileInputs = {} ;
      profileInputs.user = req.user.id; 
-     if(req.body.userName) profileInputs.userName = req.body.userName;
-     if(req.body.location) profileInputs.location = req.body.location;
-     if(req.body.bio) profileInputs.bio = req.body.bio;
-     if(req.body.occupation) profileInputs.occupation = req.body.occupation;
-     //The next tnree inputs need to separated to be put into an array.
-        if (typeof req.body.skills !== 'undefined') {
-            profileInputs.skills = req.body.skills.split(',')
-            // .map(function(item){
-            //     return item.trim();
-            // });
-        }
-        if (typeof req.body.equipment !== 'undefined') {
-            profileInputs.equipment = req.body.equipment.split(',')
-            // .map(function(item){
-            //     return item.trim();
-            // });
-        }
-
-        if (typeof req.body.interests !== 'undefined') {
-            profileInputs.interests = req.body.interests.split(',')
-            // .map(function(item){
-            //     return item.trim();
-            // });
-        }
-
+     if(req.body.connections) profileInputs.connection = req.body.connections;
+     
+     //The next three inputs need to separated to be put into an array.
         Profile.findOne({ user: req.user.id })
         .then(profile => {
-
             //make sure profile exists
             if(profile) {
-                Profile.findOneAndUpdate(
-                    { user: req.user.id },
+                Profile.push(
+                    { connections: req.user.connections },
                     { $set: profileInputs },
                     { new: true }
                 )
                 .then(profile => res.json(profile));
             } else {
-
-                //Create
-                //Check if username exists
-                Profile.findOne({ userName: profileInputs.userName })
-                .then(profile => {
-                    if(profile) {
-                        errors.userName = 'Thant username already exists';
-                        res.status(400).json(errors); 
-                    }
-
-                    //save profile
-                    new Profile(profileInputs).save()
-                    .then(profile => res.json(profile));
-
-                    //
-                })
-            }
-        })
+                return res.status(400).json(errors);  //
+                }
+            })
+        
     }
   );
 
