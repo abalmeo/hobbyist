@@ -65,14 +65,14 @@ class SearchedUser extends Component {
       }
     })
     .then(res => {
-      console.log(res.data);
-      console.log("logged in user " + res.data.id);
+      
       this.setState({loggedInUser: res.data});
       const profile = {
-        connections: this.state.profile.userName
+        connections: this.state.profile.userName,
+        user: this.state.loggedInUser.id
       }
       console.log(profile);
-            axios.post('/api/profile', profile, {
+            axios.post('/api/profile/connection', profile, {
               headers: {
                   "Authorization": localStorage.getItem("token")
               }

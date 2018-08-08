@@ -41,6 +41,29 @@ router.get(
   );
 
 //POST api/profile
+//Create Connections
+//Private route
+router.post('/connection',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    
+            // Get inputs
+    const profileInputs = {} ;
+    if(req.body.connections) profileInputs.connections = req.body.connections;
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+
+            //will add connection only if connection doesn't exist
+            if(profile) {
+                Profile.findOneAndUpdate(
+                    { $addToSet: profileInputs }
+                )
+                .then(profile => res.json(profile));
+            }
+            })
+    });
+
+//POST api/profile
 //Create or Edit user profile
 //Private route
 router.post('/',
@@ -62,7 +85,6 @@ router.post('/',
      if(req.body.userName) profileInputs.userName = req.body.userName;
      if(req.body.location) profileInputs.location = req.body.location;
      if(req.body.bio) profileInputs.bio = req.body.bio;
-     if(req.body.connections) profileInputs.connections = req.body.connections;
      if(req.body.occupation) profileInputs.occupation = req.body.occupation;
      //The next tnree inputs need to separated to be put into an array.
         if (typeof req.body.skills !== 'undefined') {
