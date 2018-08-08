@@ -66,8 +66,21 @@ class SearchedUser extends Component {
     })
     .then(res => {
       console.log(res.data);
-      console.log("you are logged in");
+      console.log("logged in user " + res.data.id);
       this.setState({loggedInUser: res.data});
+      const profile = {
+        connections: this.state.profile.userName
+      }
+      console.log(profile);
+            axios.post('/api/profile', profile, {
+              headers: {
+                  "Authorization": localStorage.getItem("token")
+              }
+          })
+          .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => this.setState({ errors: err.response.data }));
       
      })
 }

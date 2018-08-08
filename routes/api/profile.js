@@ -62,6 +62,7 @@ router.post('/',
      if(req.body.userName) profileInputs.userName = req.body.userName;
      if(req.body.location) profileInputs.location = req.body.location;
      if(req.body.bio) profileInputs.bio = req.body.bio;
+     if(req.body.connections) profileInputs.connections = req.body.connections;
      if(req.body.occupation) profileInputs.occupation = req.body.occupation;
      //The next tnree inputs need to separated to be put into an array.
         if (typeof req.body.skills !== 'undefined') {
