@@ -20,8 +20,10 @@ class SearchedUser extends Component {
       bio: "",
       errors: {},
       profile: [],
-      redirectTo: null
+      redirectTo: null,
+      loggedInUser:"",
     }
+    this.onClick= this.onClick.bind(this); 
   }
 
   loggedIn() {
@@ -54,6 +56,38 @@ class SearchedUser extends Component {
        })
        .catch(err => this.setState({ errors: err.response.data }));
   }
+
+  onClick(){
+     
+    axios.get("/api/users/current", {
+      headers: {
+        "Authorization": localStorage.getItem("token")
+      }
+    })
+    .then(res => {
+      
+      this.setState({loggedInUser: res.data});
+      const profile = {
+        connections: this.state.profile.userName,
+        user: this.state.loggedInUser.id
+      }
+      console.log(profile);
+            axios.post('/api/profile/connection', profile, {
+              headers: {
+                  "Authorization": localStorage.getItem("token")
+              }
+          })
+          .then(res => {
+            console.log(res.data)
+        })
+        .catch(err => this.setState({ errors: err.response.data }));
+      
+     })
+}
+
+
+
+  
 
 
   render() {
@@ -115,7 +149,7 @@ class SearchedUser extends Component {
 
               <div className="row">
                   <div className="col-12 ">
-                    <a href="/editprofile" className="btn ojbtn mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
+                    <a  onClick={this.onClick} className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
                   </div>
                 </div>
            

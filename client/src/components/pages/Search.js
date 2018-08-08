@@ -38,14 +38,17 @@ class Search extends Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        const searchUser = {
-            query: this.state.query
-        }
+        axios.get('/api/profile/search')
+        .then(res => {
+            console.log(res.data);
+            this.setState({
+                profiles: res.data
+            });
+        })
+        .catch(err => this.setState({ errors: err.response.data }));
     }
 
-    onClick() {
 
-    }
 
     
     render() {

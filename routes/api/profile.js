@@ -41,6 +41,29 @@ router.get(
   );
 
 //POST api/profile
+//Create Connections
+//Private route
+router.post('/connection',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    
+            // Get inputs
+    const profileInputs = {} ;
+    if(req.body.connections) profileInputs.connections = req.body.connections;
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+
+            //will add connection only if connection doesn't exist
+            if(profile) {
+                Profile.findOneAndUpdate(
+                    { $addToSet: profileInputs }
+                )
+                .then(profile => res.json(profile));
+            }
+            })
+    });
+
+//POST api/profile
 //Create or Edit user profile
 //Private route
 router.post('/',
