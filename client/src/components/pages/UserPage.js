@@ -81,13 +81,13 @@ class UserPage extends Component {
               <div className="col-md-12">
                   <div className="card card-body bg-light mb-3">
                     <h3 className="text-center">Bio</h3>
-                    <p className="lead">{this.state.profile.bio}
+                    <p className="text-center">{this.state.profile.bio}
                 </p>
                     <hr />
 
-                    <h3 className="text-center text-info">Skills</h3>
+                    <h3 className="text-center">Skills</h3>
 
-                    <div className="row">
+                    <div className="row justify-content-center">
                       <div className="d-flex flex-wrap justify-content-center align-items-center">
                         
                         {this.state.skills.map((index) => (

@@ -85,13 +85,13 @@ class SearchedUser extends Component {
                
               <div className="col-md-12">
                   <div className="card card-body bg-light mb-3">
-                    <h3 className="text-center text-info">Bio</h3>
-                    <p className="lead">{this.state.profile.bio}
+                    <h3 className="text-center">Bio</h3>
+                    <p className="text-center">{this.state.profile.bio}
                 </p>
                     <hr />
-                    <h3 className="text-center text-info">Skill Set</h3>
-                    <div className="row">
-                      <div className="d-flex flex-wrap justify-content-center align-items-center">
+                    <h3 className="text-center">Skill Set</h3>
+                    <div className="row justify-content-center">
+                      <div className="d-flex flex-wrap">
                         
                         {this.state.skills.map((index) => (
                           <div className="p-3">
@@ -115,7 +115,7 @@ class SearchedUser extends Component {
 
               <div className="row">
                   <div className="col-12 ">
-                    <a href="/editprofile" className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
+                    <a href="/editprofile" className="btn ojbtn mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
                   </div>
                 </div>
            
