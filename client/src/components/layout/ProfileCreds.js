@@ -3,7 +3,7 @@ import { PromiseProvider } from 'mongoose';
 
 export default ({children}) => {
     return (
-        <div className="row">
+        <div className="row justify-content-center">
             <div className="col-md-12">
                 <h3 className="text-center">Interests</h3>
                 {children}

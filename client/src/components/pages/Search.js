@@ -96,7 +96,8 @@ class Search extends Component {
 
                             
                                 <li className="list-group-item">
-                                    <i className="fa fa-check pr-1"></i>{profile.skills}</li>
+                                    {profile.skills}
+                                </li>
                                 </ul>
                             </div>
                         </div>

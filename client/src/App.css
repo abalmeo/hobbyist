@@ -85,3 +85,10 @@ img {
   background: rgb(52, 53, 56);
   color: black;
 }
+
+
+/* Interests Lists */
+.interests-list {
+  display: block;
+  margin: 0 auto; 
+}
