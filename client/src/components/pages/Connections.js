@@ -22,10 +22,11 @@ class Search extends Component {
     }
 
     getProfile() {
-        console.log("testing");
+        console.log("testing connections");
         axios.get('api/profile/connections')
             .then(res => {
                 console.log(res.data);
+                console.log("test"); 
                 this.setState({
                     profiles: res.data
                 });
