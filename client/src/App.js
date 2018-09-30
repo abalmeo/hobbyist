@@ -10,6 +10,7 @@ import EditProfile from "./components/pages/EditProfile";
 import Search from "./components/pages/Search";
 import UserPage from "./components/pages/UserPage"
 import Message from "./components/pages/Message";
+import Connections from "./components/pages/Connections";
 import SearchedUser from "./components/pages/SearchedUser";
 
 
@@ -36,6 +37,7 @@ class App extends Component {
             <Route exact path="/search" component={Search} />
             <Route exact path="/message" component={Message} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/connections" component={Connections} />
             <Route exact path={"/user/:username"} component={SearchedUser} />
             <Route exact path="/userpage" component={UserPage} />
             <Route exact path="/profile" component={UpdateProfile} />

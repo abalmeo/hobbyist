@@ -11,42 +11,57 @@ class Search extends Component {
         this.state = {
             query: '',
             profiles: [],
-            errors: {}
+            errors: {},
+            connections: []
         }
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+    
     }
 
     componentDidMount() {
-        this.getProfile();
-    }
 
-    getProfile() {
-        console.log("testing");
-        axios.get('api/profile/connections')
-            .then(res => {
-                console.log(res.data);
+        axios.get("/api/profile", {
+          headers: {
+            "Authorization": localStorage.getItem("token")
+          }
+        })
+          .then(res => {
+            console.log(localStorage.getItem("token"))
+            console.log(res.data);
+            // if not logged in, re-route to login page
+            if (!this.loggedIn) {
+              this.setState({redirectTo: "/login"});
+            }
+            // set state of connections from MongoDB
+            this.setState({connections: res.data.connections});
+            console.log(this.state.connections);
+            const connections = {connections: this.state.connections};
+            console.log(connections); 
+
+          debugger; 
+          //Use connections from state to query for profiles with associated usernames
+            return axios.get('/api/profile/connections',connections)
+            .then(res =>{
                 this.setState({
-                    profiles: res.data
-                });
+                    profiles:res.data
+                })
+                console.log(this.state.profiles);
             })
-            .catch(err => this.setState({ errors: err.response.data }));
-    }
+            .catch(err =>this.setState({errors: err.response.data}));
+           })
+           
+           
+ 
+            
+        
+      }
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
+
+
     }
-    onSubmit(e) {
-        e.preventDefault();
-        axios.get('/api/profile/search')
-        .then(res => {
-            console.log(res.data);
-            this.setState({
-                profiles: res.data
-            });
-        })
-        .catch(err => this.setState({ errors: err.response.data }));
-    }
+
 
 
 
@@ -57,20 +72,6 @@ class Search extends Component {
             <div>
                 <div className="row justify-content-start">
                 <div className="col-lg-4">
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            placeholder="Search for..."
-                            name="query"
-                            value={this.state.query}
-                            onChange={this.onChange}
-                        />
-                        <br/>
-                        <input type="submit" className="btn landbtn mt-4" />
-                    </div>
-                    
-                </form>
                 </div>
                 </div>
 

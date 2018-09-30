@@ -199,18 +199,13 @@ router.get('/all', (req, res) => {
 //GET api/profile
 //Get current users profile
 //Private route
-router.get(
-    '/connections',
-    passport.authenticate('jwt', { session: false }),
-    (req, res) => {
-        //Get fields 
+router.get('/connections/:userNames',(req, res) => {
+        //Get Connections
       const errors = {}; 
-  
-      Profile.find({ userName: req.user.connections })
-        .populate('user', ['name', 'avatar'])
+      Profile.find({ userName: 'ag24' })
         .then(profile => {
           if (!profile) {
-            errors.noprofile = 'There is no profile for this user';
+            errors.noprofile = 'You do not have any connections';
             return res.status(404).json(errors);
           }
           res.json(profile);
@@ -220,3 +215,6 @@ router.get(
   );
 
 module.exports = router; 
+
+
+//{$in: req.params.userNames }
