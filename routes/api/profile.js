@@ -199,7 +199,7 @@ router.get('/all', (req, res) => {
 //GET api/profile
 //Get current users profile
 //Private route
-router.get('/connections/:userNames',(req, res) => {
+router.get('/connection/:connections',(req, res) => {
         //Get Connections
       const errors = {}; 
       Profile.find({ userName: 'ag24' })
