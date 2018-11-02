@@ -177,6 +177,8 @@ router.get('/user/:id', (req, res) => {
         .catch(err => res.status(404).json({profile: 'There is no profile for this user'})); 
 }); 
 
+
+
 //GET api/profile/all
 //Get all profiles
 //Public
@@ -185,7 +187,7 @@ router.get('/all', (req, res) => {
     Profile.find()
     .then( profiles => {
         if(!profiles) {
-            errors.noprofile = 'There are no profile';
+            errors.noprofile = 'There are no profiles';
             res.status(404).json(errors); 
         }
         res.json(profiles)
@@ -199,20 +201,22 @@ router.get('/all', (req, res) => {
 //GET api/profile
 //Get current users profile
 //Private route
-router.get('/connections/:userNames',(req, res) => {
+router.post("/connections",(req, res) => {
         //Get Connections
       const errors = {}; 
-      Profile.find({ userName: 'ag24' })
-        .then(profile => {
-          if (!profile) {
-            errors.noprofile = 'You do not have any connections';
-            return res.status(404).json(errors);
-          }
-          res.json(profile);
-        })
-        .catch(err => res.status(404).json(err));
+      let connections = req.body.connectedUsers ;
+   Profile.find({ userName: { $in: connections }})
+    
+   .then(profile => {
+    if (!profile) {
+      errors.noprofile = 'You do not have any connections';
+      return res.status(404).json(errors);
     }
-  );
+
+    res.json(profile);
+  })
+  .catch(err => res.status(404).json(err));
+})
 
 module.exports = router; 
 

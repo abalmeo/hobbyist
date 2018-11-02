@@ -59,7 +59,7 @@ class SearchedUser extends Component {
 
   onClick(){
      
-    axios.get("/api/users/current", {
+    axios.post("/api/users/current", {
       headers: {
         "Authorization": localStorage.getItem("token")
       }

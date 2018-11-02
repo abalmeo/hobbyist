@@ -34,7 +34,7 @@ app.use('/api/users', users);
 app.use('/api/profile', profile);
 
 //Serve static assets if in production
-/*
+
 if(process.env.NODE_ENV ==='production'){
     //Set static folder to client build
     app.user(express.satic('client/build')); 
@@ -43,7 +43,8 @@ if(process.env.NODE_ENV ==='production'){
     })
 }
 
-*/
+
+
 const port = process.env.PORT || 8000;
 
 //Start Server

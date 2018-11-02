@@ -12,49 +12,61 @@ class Search extends Component {
             query: '',
             profiles: [],
             errors: {},
-            connections: []
+            connections: [],
+            redirectTo: null
         }
         this.onChange = this.onChange.bind(this);
-    
+
+    }
+
+    loggedIn() {
+        const token = this.getToken("token")
+        return !!token && !this.isTokenExpired(token)
     }
 
     componentDidMount() {
 
         axios.get("/api/profile", {
-          headers: {
-            "Authorization": localStorage.getItem("token")
-          }
-        })
-          .then(res => {
-            console.log(localStorage.getItem("token"))
-            console.log(res.data);
-            // if not logged in, re-route to login page
-            if (!this.loggedIn) {
-              this.setState({redirectTo: "/login"});
+            headers: {
+                "Authorization": localStorage.getItem("token")
             }
-            // set state of connections from MongoDB
-            this.setState({connections: res.data.connections});
-            console.log(this.state.connections);
-            const connections = {connections: this.state.connections};
-            console.log(connections); 
+        })
+            .then(res => {
 
-          debugger; 
-          //Use connections from state to query for profiles with associated usernames
-            return axios.get('/api/profile/connections',connections)
-            .then(res =>{
-                this.setState({
-                    profiles:res.data
-                })
-                console.log(this.state.profiles);
+                console.log(res.data);
+                // if not logged in, re-route to login page
+                if (!this.loggedIn) {
+                    this.setState({ redirectTo: "/login" });
+                }
+                else {
+                    console.log("you are logged in");
+                }
+
+                // set state of connections from MongoDB
+                this.setState({ connections: res.data.connections });
+                console.log(this.state.connections);
+
+                let connect = {
+                    connectedUsers: this.state.connections
+                }
+
+                console.log(connect);
+
+
+
+                axios.post("/api/profile/connections", connect)
+                    .then(res => {
+                        this.setState({
+                            profiles: res.data
+                        })
+                        console.log(res);
+                        console.log(res.data.connections);
+                    })
+                    .catch(err => this.setState({ errors: err.response.data }));
             })
-            .catch(err =>this.setState({errors: err.response.data}));
-           })
-           
-           
- 
-            
-        
-      }
+    }
+
+
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -65,14 +77,14 @@ class Search extends Component {
 
 
 
-    
+
     render() {
 
         return (
             <div>
                 <div className="row justify-content-start">
-                <div className="col-lg-4">
-                </div>
+                    <div className="col-lg-4">
+                    </div>
                 </div>
 
                 {this.state.profiles.map(profile => (
@@ -95,10 +107,10 @@ class Search extends Component {
                                 <h4>Skill Set</h4>
                                 <ul className="list-group">
 
-                            
-                                <li className="list-group-item">
-                                    {profile.skills}
-                                </li>
+
+                                    <li className="list-group-item">
+                                        {profile.skills}
+                                    </li>
                                 </ul>
                             </div>
                         </div>
