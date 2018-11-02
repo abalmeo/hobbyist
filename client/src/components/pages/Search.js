@@ -37,8 +37,11 @@ class Search extends Component {
         this.setState({ [e.target.name]: e.target.value });
     }
     onSubmit(e) {
+        let search = {
+            query: this.state.query
+        }
         e.preventDefault();
-        axios.get('/api/profile/search')
+        axios.post('/api/profile/search',search)
         .then(res => {
             console.log(res.data);
             this.setState({

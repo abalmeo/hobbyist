@@ -160,6 +160,25 @@ router.get('/username/:username', (req, res) => {
         .catch(err => res.status(404).json(err)); 
 }); 
 
+
+//POST api/profile/search, {search}
+//Get user profiles by search query
+//Public
+router.post('/search', (req, res) => {
+    const errors = {}; 
+
+    Profile.find({skills: req.body.query})
+        .then(profile => {
+            if(!profile) {
+                errors.noprofile = 'There is no profile for this user';
+                res.status(404).json(errors); 
+            }
+
+            res.json(profile);
+        })
+        .catch(err => res.status(404).json(err)); 
+}); 
+
 //GET api/profile/user/:id
 //Get user profile by id
 //Public
