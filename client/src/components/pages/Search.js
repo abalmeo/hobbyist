@@ -15,6 +15,7 @@ class Search extends Component {
         }
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        
     }
 
     componentDidMount() {
@@ -32,6 +33,7 @@ class Search extends Component {
             })
             .catch(err => this.setState({ errors: err.response.data }));
     }
+    
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -64,13 +66,14 @@ class Search extends Component {
                     <div className="form-group">
                         <input
                             type="text"
-                            placeholder="Search for..."
+                            placeholder="Search skill set..."
                             name="query"
                             value={this.state.query}
                             onChange={this.onChange}
                         />
                         <br/>
                         <input type="submit" className="btn landbtn mt-4" />
+                        <a href="/search" className="btn btn-dark mt-4">All Profiles</a>
                     </div>
                     
                 </form>
