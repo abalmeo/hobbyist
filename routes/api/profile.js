@@ -41,6 +41,29 @@ router.get(
   );
 
 //POST api/profile
+//Create Connections
+//Private route
+router.post('/connection',
+passport.authenticate('jwt', { session: false }),
+(req, res) => {
+    
+            // Get inputs
+    const profileInputs = {} ;
+    if(req.body.connections) profileInputs.connections = req.body.connections;
+    Profile.findOne({ user: req.user.id })
+        .then(profile => {
+
+            //will add connection only if connection doesn't exist
+            if(profile) {
+                Profile.findOneAndUpdate(
+                    { $addToSet: profileInputs }
+                )
+                .then(profile => res.json(profile));
+            }
+            })
+    });
+
+//POST api/profile
 //Create or Edit user profile
 //Private route
 router.post('/',
@@ -154,6 +177,8 @@ router.get('/user/:id', (req, res) => {
         .catch(err => res.status(404).json({profile: 'There is no profile for this user'})); 
 }); 
 
+
+
 //GET api/profile/all
 //Get all profiles
 //Public
@@ -162,7 +187,7 @@ router.get('/all', (req, res) => {
     Profile.find()
     .then( profiles => {
         if(!profiles) {
-            errors.noprofile = 'There are no profile';
+            errors.noprofile = 'There are no profiles';
             res.status(404).json(errors); 
         }
         res.json(profiles)
@@ -172,4 +197,28 @@ router.get('/all', (req, res) => {
     })
 })
 
+
+//GET api/profile
+//Get current users profile
+//Private route
+router.post("/connections",(req, res) => {
+        //Get Connections
+      const errors = {}; 
+      let connections = req.body.connectedUsers ;
+   Profile.find({ userName: { $in: connections }})
+    
+   .then(profile => {
+    if (!profile) {
+      errors.noprofile = 'You do not have any connections';
+      return res.status(404).json(errors);
+    }
+
+    res.json(profile);
+  })
+  .catch(err => res.status(404).json(err));
+})
+
 module.exports = router; 
+
+
+//{$in: req.params.userNames }

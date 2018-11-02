@@ -11,67 +11,80 @@ class Search extends Component {
         this.state = {
             query: '',
             profiles: [],
-            errors: {}
+            errors: {},
+            connections: [],
+            redirectTo: null
         }
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+
+    }
+
+    loggedIn() {
+        const token = this.getToken("token")
+        return !!token && !this.isTokenExpired(token)
     }
 
     componentDidMount() {
-        this.getProfile();
+
+        axios.get("/api/profile", {
+            headers: {
+                "Authorization": localStorage.getItem("token")
+            }
+        })
+            .then(res => {
+
+                console.log(res.data);
+                // if not logged in, re-route to login page
+                if (!this.loggedIn) {
+                    this.setState({ redirectTo: "/login" });
+                }
+                else {
+                    console.log("you are logged in");
+                }
+
+                // set state of connections from MongoDB
+                this.setState({ connections: res.data.connections });
+                console.log(this.state.connections);
+
+                let connect = {
+                    connectedUsers: this.state.connections
+                }
+
+                console.log(connect);
+
+
+
+                axios.post("/api/profile/connections", connect)
+                    .then(res => {
+                        this.setState({
+                            profiles: res.data
+                        })
+                        console.log(res);
+                        console.log(res.data.connections);
+                    })
+                    .catch(err => this.setState({ errors: err.response.data }));
+            })
     }
 
-    getProfile() {
-        console.log("testing");
-        axios.get('api/profile/all')
-            .then(res => {
-                console.log(res.data);
-                this.setState({
-                    profiles: res.data
-                });
-            })
-            .catch(err => this.setState({ errors: err.response.data }));
-    }
+
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
-    }
-    onSubmit(e) {
-        e.preventDefault();
-        axios.get('/api/profile/search')
-        .then(res => {
-            console.log(res.data);
-            this.setState({
-                profiles: res.data
-            });
-        })
-        .catch(err => this.setState({ errors: err.response.data }));
+
+
     }
 
 
 
-    
+
+
     render() {
 
         return (
             <div>
                 <div className="row justify-content-start">
-                <div className="col-lg-4">
-                <form onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <input
-                            type="text"
-                            placeholder="Search for..."
-                            name="query"
-                            value={this.state.query}
-                            onChange={this.onChange}
-                        />
-                        <br/>
-                        <input type="submit" className="btn landbtn mt-4" />
+                    <div className="col-lg-4">
                     </div>
-                    
-                </form>
-                </div>
                 </div>
 
                 {this.state.profiles.map(profile => (
@@ -94,10 +107,10 @@ class Search extends Component {
                                 <h4>Skill Set</h4>
                                 <ul className="list-group">
 
-                            
-                                <li className="list-group-item">
-                                    {profile.skills}
-                                </li>
+
+                                    <li className="list-group-item">
+                                        {profile.skills}
+                                    </li>
                                 </ul>
                             </div>
                         </div>

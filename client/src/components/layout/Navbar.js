@@ -62,6 +62,12 @@ class Navbar extends Component {
                   </Link>
                 </li>
                 <li className="nav-item">
+                  <Link className="nav-link" to="/connections">
+                    {' '}
+                    Connections
+                  </Link>
+                </li>
+                <li className="nav-item">
                   <Link className="nav-link" to="/search">
                     {' '}
                     Enthusiasts
