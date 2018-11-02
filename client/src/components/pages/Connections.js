@@ -33,7 +33,6 @@ class Search extends Component {
         })
             .then(res => {
 
-                console.log(res.data);
                 // if not logged in, re-route to login page
                 if (!this.loggedIn) {
                     this.setState({ redirectTo: "/login" });
@@ -41,26 +40,18 @@ class Search extends Component {
                 else {
                     console.log("you are logged in");
                 }
-
                 // set state of connections from MongoDB
                 this.setState({ connections: res.data.connections });
-                console.log(this.state.connections);
 
                 let connect = {
                     connectedUsers: this.state.connections
                 }
-
-                console.log(connect);
-
-
 
                 axios.post("/api/profile/connections", connect)
                     .then(res => {
                         this.setState({
                             profiles: res.data
                         })
-                        console.log(res);
-                        console.log(res.data.connections);
                     })
                     .catch(err => this.setState({ errors: err.response.data }));
             })

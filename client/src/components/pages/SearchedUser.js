@@ -69,21 +69,16 @@ class SearchedUser extends Component {
     if (this.state.loggedInUser === "") {
       console.log('you are not logged in');
       this.setState({ redirectTo: "/" });
-
-      axios.get("/api/users/current", {
-        headers: {
-          "Authorization": localStorage.getItem("token")
-        }
-      })
-        .then(res => {
-
-          this.setState({ loggedInUser: res.data.userName });
-          console.log(this.state.loggedInUser);
-          const profile = {
-            connections: this.state.profile.userName,
+    }
+    else{
+   
+          const connecting = {
+            connectTo: this.state.profile.userName,
+            loggedInUser: this.state.loggedInUser
           }
-          console.log(profile);
-          axios.post('/api/profile/connection', profile, {
+          console.log(connecting); 
+
+          axios.post('/api/profile/makeConnection', connecting, {
             headers: {
               "Authorization": localStorage.getItem("token")
             }
@@ -93,8 +88,8 @@ class SearchedUser extends Component {
             })
             .catch(err => this.setState({ errors: err.response.data }));
 
-        })
-    }
+       
+      }
   }
 
 

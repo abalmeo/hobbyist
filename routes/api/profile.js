@@ -43,20 +43,22 @@ router.get(
 //POST api/profile
 //Create Connections
 //Private route
-router.post('/connection',
+router.post('/makeConnection',
 passport.authenticate('jwt', { session: false }),
 (req, res) => {
+    const errors ={}; 
     
             // Get inputs
-    const profileInputs = {} ;
-    if(req.body.connections) profileInputs.connections = req.body.connections;
-    Profile.findOne({ user: req.user.id })
+    let profileInputs = {} ;
+    profileInputs = req.body.connectTo;
+    Profile.findOne({ userName: req.body.loggedInUser })
         .then(profile => {
 
             //will add connection only if connection doesn't exist
             if(profile) {
                 Profile.findOneAndUpdate(
-                    { $addToSet: profileInputs }
+                    {userName: req.body.loggedInUser},
+                    { $addToSet: {connections: profileInputs }}
                 )
                 .then(profile => res.json(profile));
             }
@@ -201,10 +203,10 @@ router.get('/all', (req, res) => {
 //GET api/profile
 //Get current users profile
 //Private route
-router.post("/connections",(req, res) => {
+router.post('/connections',(req, res) => {
         //Get Connections
       const errors = {}; 
-      let connections = req.body.connectedUsers ;
+      let connections = req.body.connectedUsers; 
    Profile.find({ userName: { $in: connections }})
     
    .then(profile => {
