@@ -16,6 +16,10 @@
 
 }
 
+.nav-link{
+    padding: 0.3rem 0.2rem;
+}
+
 img {
   width: 100%;
 }

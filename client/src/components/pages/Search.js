@@ -91,7 +91,7 @@ class Search extends Component {
                                 <p>{profile.occupation}</p>
                                 <p>{profile.location}</p>
                                 <Link className="nav-link" to={`/user/${profile.userName}`}>
-                                <a key={profile.userName} value={profile.userName} className="btn btn-info profile-cards">View Profile</a>
+                                <a key={profile.userName} value={profile.userName} className="btn btn-info ">View Profile</a>
                                 </Link>
                                 <a href="/message" className="btn btn-dark ml-1">Message</a>
 

@@ -71,7 +71,7 @@ class Navbar extends Component {
                 <li className="nav-item">
                   <Link className="nav-link" to="/search">
                     {' '}
-                    Enthusiasts
+                    Hobbyists
                   </Link>
                 </li>
                 <li className="nav-item mr-4">
@@ -86,7 +86,7 @@ class Navbar extends Component {
                   <li className="nav-item">
                   <Link className="nav-link" to="/search">
                       {' '}
-                      Enthusiasts
+                      Hobbyists
                     </Link>
                   </li>
                   <li className="nav-item">
