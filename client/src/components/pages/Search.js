@@ -78,7 +78,7 @@ class Search extends Component {
                 </div>
 
                 {this.state.profiles.map(profile => (
-                    <div className="card card-body bg-light mb-3">
+                    <div key={profile.userName} className="card card-body bg-light mb-3">
                         <div className="row">
                             <div className="col-2">
                                 <img className="rounded-circle" src={TreeLogoLg} alt="" />
@@ -88,7 +88,7 @@ class Search extends Component {
                                 <p>{profile.occupation}</p>
                                 <p>{profile.location}</p>
                                 <Link className="nav-link" to={`/user/${profile.userName}`}>
-                                <a value={profile.userName} className="btn btn-info profile-cards">View Profile</a>
+                                <a key={profile.userName} value={profile.userName} className="btn btn-info profile-cards">View Profile</a>
                                 </Link>
                                 <a href="/message" className="btn btn-dark ml-1">Message</a>
 

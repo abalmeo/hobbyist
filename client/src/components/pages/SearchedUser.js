@@ -31,6 +31,8 @@ class SearchedUser extends Component {
     return !!token && !this.isTokenExpired(token)
   }
 
+ 
+
 
 
 
@@ -127,7 +129,7 @@ class SearchedUser extends Component {
                 <div className="col-md-12">
                   <div className="card card-body bg-light mb-3">
                     <h3 className="text-center">Bio</h3>
-                    <p className="text-center">{this.state.profile.bio}
+                    <p key={this.state.profile.bio} className="text-center">{this.state.profile.bio}
                     </p>
                     <hr />
                     <h3 className="text-center">Skill Set</h3>
@@ -156,7 +158,7 @@ class SearchedUser extends Component {
 
                 <div className="row">
                   <div className="col-12 ">
-                    <a onClick={this.onClick} className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
+                    <a onClick={this.onClick} key={this.state.profile.userName} className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
                   </div>
                 </div>
 
