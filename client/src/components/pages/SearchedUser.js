@@ -36,21 +36,12 @@ class SearchedUser extends Component {
 
   componentDidMount() {
     const { match: { params } } = this.props;
-
-    axios.get(`/api/profile/username/${params.username}`, {
-      headers: {
-        "Authorization": localStorage.getItem("token")
-      }
-    })
+    console.log(params.username);
+    axios.get(`/api/profile/username/${params.username}`,)
       .then(res => {
         console.log(res.data);
-        if (!this.loggedIn) {
-
-          this.setState({redirectTo: "/login"});
-      }
-      else {
-        console.log("you are logged in");
-      }
+           
+      
         this.setState({profile: res.data, skills: res.data.skills});
         console.log(this.state.skills);
        })
@@ -58,18 +49,21 @@ class SearchedUser extends Component {
   }
 
   onClick(){
+    if (this.state.loggedInUser==="") {
+      console.log('you are not logged in');
+      this.setState({redirectTo: "/login"});
      
-    axios.post("/api/users/current", {
+    axios.get("/api/users/current", {
       headers: {
         "Authorization": localStorage.getItem("token")
       }
     })
     .then(res => {
       
-      this.setState({loggedInUser: res.data});
+      this.setState({loggedInUser: res.data.userName});
+      console.log(this.state.loggedInUser); 
       const profile = {
         connections: this.state.profile.userName,
-        user: this.state.loggedInUser.id
       }
       console.log(profile);
             axios.post('/api/profile/connection', profile, {
@@ -84,6 +78,7 @@ class SearchedUser extends Component {
       
      })
 }
+  }
 
 
 
