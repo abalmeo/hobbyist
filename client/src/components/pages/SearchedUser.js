@@ -21,9 +21,9 @@ class SearchedUser extends Component {
       errors: {},
       profile: [],
       redirectTo: null,
-      loggedInUser:"",
+      loggedInUser: "",
     }
-    this.onClick= this.onClick.bind(this); 
+    this.onClick = this.onClick.bind(this);
   }
 
   loggedIn() {
@@ -37,52 +37,69 @@ class SearchedUser extends Component {
   componentDidMount() {
     const { match: { params } } = this.props;
     console.log(params.username);
-    axios.get(`/api/profile/username/${params.username}`,)
+    axios.get(`/api/profile/username/${params.username}`, )
       .then(res => {
         console.log(res.data);
-           
-      
-        this.setState({profile: res.data, skills: res.data.skills});
+
+
+        this.setState({ profile: res.data, skills: res.data.skills });
         console.log(this.state.skills);
-       })
-       .catch(err => this.setState({ errors: err.response.data }));
-  }
+      })
+      .catch(err => this.setState({ errors: err.response.data }));
 
-  onClick(){
-    if (this.state.loggedInUser==="") {
-      console.log('you are not logged in');
-      this.setState({redirectTo: "/login"});
-     
-    axios.get("/api/users/current", {
-      headers: {
-        "Authorization": localStorage.getItem("token")
-      }
-    })
-    .then(res => {
-      
-      this.setState({loggedInUser: res.data.userName});
-      console.log(this.state.loggedInUser); 
-      const profile = {
-        connections: this.state.profile.userName,
-      }
-      console.log(profile);
-            axios.post('/api/profile/connection', profile, {
-              headers: {
-                  "Authorization": localStorage.getItem("token")
-              }
+          axios.get("/api/profile", {
+            headers: {
+              "Authorization": localStorage.getItem("token")
+            }
           })
-          .then(res => {
-            console.log(res.data)
+            .then(res => {
+              console.log(res.data);
+              // if not logged in, re-route to login page
+              if (!this.loggedIn) {
+                this.setState({ redirectTo: "/login" });
+              }
+              else {
+                console.log("you are logged in");
+              }
+              this.setState({ loggedInUser: res.data.userName });
+            });
+  }
+
+  onClick() {
+    if (this.state.loggedInUser === "") {
+      console.log('you are not logged in');
+      this.setState({ redirectTo: "/" });
+
+      axios.get("/api/users/current", {
+        headers: {
+          "Authorization": localStorage.getItem("token")
+        }
+      })
+        .then(res => {
+
+          this.setState({ loggedInUser: res.data.userName });
+          console.log(this.state.loggedInUser);
+          const profile = {
+            connections: this.state.profile.userName,
+          }
+          console.log(profile);
+          axios.post('/api/profile/connection', profile, {
+            headers: {
+              "Authorization": localStorage.getItem("token")
+            }
+          })
+            .then(res => {
+              console.log(res.data)
+            })
+            .catch(err => this.setState({ errors: err.response.data }));
+
         })
-        .catch(err => this.setState({ errors: err.response.data }));
-      
-     })
-}
+    }
   }
 
 
 
-  
+
 
 
   render() {
@@ -96,58 +113,58 @@ class SearchedUser extends Component {
     } else {
 
 
-    return (
+      return (
         <div className="profile">
           <div className="container">
             <div className="row">
               <div className="col-md-12">
-                
-              
 
 
-              <ProfileHeader
-              key={this.state.profile._id}
-                name={this.state.profile.userName}
-                location={this.state.profile.location}
-                occupation={this.state.profile.occupation}
-              />
-               
-              <div className="col-md-12">
+
+
+                <ProfileHeader
+                  key={this.state.profile._id}
+                  name={this.state.profile.userName}
+                  location={this.state.profile.location}
+                  occupation={this.state.profile.occupation}
+                />
+
+                <div className="col-md-12">
                   <div className="card card-body bg-light mb-3">
                     <h3 className="text-center">Bio</h3>
                     <p className="text-center">{this.state.profile.bio}
-                </p>
+                    </p>
                     <hr />
                     <h3 className="text-center">Skill Set</h3>
                     <div className="row justify-content-center">
                       <div className="d-flex flex-wrap">
-                        
+
                         {this.state.skills.map((index) => (
                           <div className="p-3">
                             {index}
                           </div>
                         ))}
-                        
+
                       </div>
                     </div>
                   </div>
                 </div>
-            
-              
-              <ProfileCreds>
-              
-                    <ListItem 
-                      key={this.state.profile._id} 
-                      interests={this.state.profile.interests}
-                    /> 
-              </ProfileCreds>
 
-              <div className="row">
+
+                <ProfileCreds>
+
+                  <ListItem
+                    key={this.state.profile._id}
+                    interests={this.state.profile.interests}
+                  />
+                </ProfileCreds>
+
+                <div className="row">
                   <div className="col-12 ">
-                    <a  onClick={this.onClick} className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
+                    <a onClick={this.onClick} className="btn btn-light mt-5 text-center justify-content-center align-items-center d-flex flex-wrap">Connect</a>
                   </div>
                 </div>
-           
+
               </div>
             </div>
           </div>
