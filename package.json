@@ -9,7 +9,7 @@
     "client-install": "npm install --prefix client",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=true npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   },
   "engines": {
     "node": "^10.5.0"
-  }, 
+  },
   "homepage": "https://github.com/argarlin24/hobbyist#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -30,7 +30,6 @@
     "concurrently": "^3.6.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.3.0",
-    "mongoose": "^5.3.7",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.4.0"
