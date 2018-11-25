@@ -35,6 +35,7 @@
     "validator": "^10.4.0"
   },
   "devDependencies": {
+    "mongoose": "^5.3.13",
     "nodemon": "^1.18.2"
   }
 }
